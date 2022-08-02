@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 p {
-	@apply font-bodyText font-normal;
+  @apply font-bodyText font-normal;
 }
 
 h1,
@@ -12,21 +12,21 @@ h3,
 h4,
 h5,
 h6 {
-	@apply font-heading;
+  @apply font-heading;
 }
 
 .logo {
-	@apply font-logo font-bold;
+  @apply font-logo font-bold;
 }
 
 .heading {
-	@apply font-heading font-bold;
+  @apply font-heading font-bold;
 }
 
 .subheading {
-	@apply font-subheading font-medium;
+  @apply font-subheading font-medium;
 }
 
 .tag {
-	@apply uppercase font-subheading;
+  @apply uppercase font-subheading;
 }
