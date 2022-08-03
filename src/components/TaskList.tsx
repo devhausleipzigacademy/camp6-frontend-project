@@ -169,7 +169,7 @@ function TaskItem({ task }: TaskProp) {
 			<select
 				name="Topic"
 				required
-				value="{task.topic}"
+				value={task.topic}
 				onChange={(event) => {
 					dispatch({
 						type: ACTIONS.CHANGE_TOPIC,

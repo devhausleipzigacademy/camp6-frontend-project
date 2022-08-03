@@ -1,10 +1,18 @@
 // need to assign and create type for tracks and topics
 
+import { Dispatch, ReactNode } from "react";
+
 // In alphabetical order
 
 export type Action = {
 	type: string;
 	payload: any;
+};
+
+export type CreateContext = Dispatch<Action>;
+
+export type ChildrenProps = {
+	children: ReactNode;
 };
 
 export const now = new Date();

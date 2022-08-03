@@ -1,18 +1,13 @@
-import {
-	createContext,
-	Dispatch,
-	ReactNode,
-	useContext,
-	useReducer,
-} from "react";
+import { createContext, useContext, useReducer } from "react";
 import { tasksDummies } from "../database/Dummies";
-import { Task, Action, Tasks } from "../database/TypesNConsts";
+import {
+	Task,
+	Action,
+	Tasks,
+	ChildrenProps,
+	CreateContext,
+} from "../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
-
-export type CreateContext = Dispatch<Action>;
-type ChildrenProps = {
-	children: ReactNode;
-};
 
 export const TasksContext = createContext<Tasks | null>(null);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
