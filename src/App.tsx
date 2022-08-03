@@ -15,7 +15,7 @@ export default function App() {
 			</header>
 
 			<main className="flex">
-				<div className="flex flex-col w-1/6 h-screen bg-customPink ">
+				<div className="flex flex-col w-1/6 h-screen bg-slate-400">
 					<SideBar />
 				</div>
 				<div className="flex flex-col items-center w-5/6 h-screen bg-customGreen ">
