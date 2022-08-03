@@ -1,25 +1,13 @@
 import { useState } from "react";
 import { topicsDummies } from "../database/Dummies";
-import { InitialTask, yesterday } from "../database/TypesNConsts";
+import { InitialTask, initialTask, yesterday } from "../database/TypesNConsts";
 
 import {
 	useTasks,
 	useTasksDispatch,
-	TasksProvider,
 	CreateContext,
 	ACTIONS,
 } from "./TasksContext";
-
-//
-// note: need to do something about deadline times
-//
-
-const initialTask: InitialTask = {
-	name: "",
-	deadline: "dd / mm / yyyy",
-	topic: "default",
-	description: "",
-};
 
 export function TaskForm() {
 	const [userInput, SetUserInput] = useState<InitialTask>(initialTask);
@@ -38,14 +26,6 @@ export function TaskForm() {
 
 	return (
 		<>
-			{/* 
-// 
-// Hi! 
-// Please delete the br and h2 tag below. 
-// Thanks!
-//  */}
-			<br />
-			<h2 className="subheading">Task Form Component</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col p-6 gap-6">
 				<input
 					required
@@ -83,8 +63,10 @@ export function TaskForm() {
 					<option disabled value="default">
 						(please select)
 					</option>
-					{topicsDummies.map((element) => (
-						<option value={element}>{element}</option>
+					{topicsDummies.map((element, idx) => (
+						<option key={idx} value={element}>
+							{element}
+						</option>
 					))}
 				</select>
 
@@ -122,21 +104,6 @@ export function TaskForm() {
 					</button>
 				</div>
 			</form>
-
-			{/* 
-// 
-// These two pre lines we should delete at some point
-//  */}
-			<div
-				id="Testing Stage"
-				className="flex flex-col gap-6 border-rose-700 border-4   border-solid"
-			>
-				<h2 className="subheading text-xl">User Input</h2>
-				<pre>{JSON.stringify(userInput)} </pre>
-				<br />
-				<h2 className="subheading text-xl">Tasks List</h2>
-				<pre>{JSON.stringify(tasks)} </pre>
-			</div>
 		</>
 	);
 }

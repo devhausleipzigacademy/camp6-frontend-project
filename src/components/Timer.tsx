@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { TimerDisplay } from "../database/TypesNConsts";
 
 // The Custom Button is just a placeholder that we can rename and redesign
 import { CustomButton } from "./custombutton";
@@ -92,7 +93,7 @@ export function Timer() {
 	}, [seconds, paused]);
 
 	return (
-		<div className="flex flex-col gap-4 items-center">
+		<div className="flex flex-col gap-4 ">
 			<p>Task: {placeholderTask}</p>
 
 			<p>

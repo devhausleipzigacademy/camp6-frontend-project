@@ -1,3 +1,7 @@
+// need to assign and create type for tracks and topics
+
+// In alphabetical order
+
 export type Action = {
 	type: string;
 	payload: any;
@@ -19,6 +23,23 @@ export type InitialTask =
 			completed?: boolean;
 	  };
 
+export const initialTask: InitialTask = {
+	name: "",
+	deadline: "dd / mm / yyyy",
+	topic: "default",
+	description: "",
+};
+
+export type Resource = {
+	title: string;
+	hyperlink: string;
+	image: string | HTMLImageElement;
+	description: string;
+	track: string;
+};
+
+export type Resources = Resource[];
+
 export type Task = {
 	id: string;
 	name: string;
@@ -27,6 +48,10 @@ export type Task = {
 	description?: string;
 	priority?: boolean;
 	completed?: boolean;
+};
+
+export type TaskProp = {
+	task: Task;
 };
 
 export type Tasks = Task[];
