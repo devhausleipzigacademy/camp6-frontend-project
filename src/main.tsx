@@ -8,6 +8,7 @@ import Topics from "./routes/Topics";
 import Feed from "./routes/Feed";
 import Resources from "./routes/Resources";
 import "./index.css";
+import Api from "./components/Api";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -17,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           <Route index element={<Home />} />
           <Route path="/tracks" element={<Tracks />} />
           <Route path="/topics" element={<Topics />} />
-          <Route path="/feed" element={<Feed />} />
+          <Route path="/feed" element={<Api />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<p>404 - Nothing was found here</p>} />
         </Route>

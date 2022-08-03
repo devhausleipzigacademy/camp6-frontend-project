@@ -12,7 +12,7 @@ export default function App() {
         <div className=" w-[25vw] h-full bg-slate-100">
           <SideBar />
         </div>
-        <div className="flex flex-row w-full  shadow-md shadow-black bg-teal-300">
+        <div className=" h-full   w-full  shadow-xl  shadow-black    bg-teal-300">
           <Outlet />
         </div>
       </div>
