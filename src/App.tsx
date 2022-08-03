@@ -1,3 +1,8 @@
+import { TaskList } from "./components/TaskList";
+import { TaskForm } from "./components/TaskForm";
+import { Timer } from "./components/Timer";
+import { TasksProvider } from "./components/TasksContext";
+
 export default function App() {
 	return (
 		<div className="App">
@@ -10,6 +15,12 @@ export default function App() {
 				API Feed <br /> Personal Archive <br /> Please check in later for
 				updates!
 			</p>
+
+			<TasksProvider>
+				<TaskForm />
+				<TaskList />
+			</TasksProvider>
+			<Timer />
 		</div>
 	);
 }
