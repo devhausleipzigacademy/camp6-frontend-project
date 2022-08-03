@@ -10,18 +10,24 @@ import {
 } from "./TasksContext";
 
 export function TaskForm() {
+	const [error, SetError] = useState("");
 	const [userInput, SetUserInput] = useState<InitialTask>(initialTask);
 	const tasks = useTasks();
 	const dispatch = useTasksDispatch() as CreateContext;
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		dispatch({ type: ACTIONS.ADD_TASK, payload: { userInput: userInput } });
-		SetUserInput(initialTask);
-		const calendar = document.getElementById(
-			"deadline-calendar"
-		) as HTMLInputElement;
-		calendar.value = calendar.defaultValue;
+		if (userInput.topic === "default") {
+			SetError("Please choose a topic");
+		} else {
+			dispatch({ type: ACTIONS.ADD_TASK, payload: { userInput: userInput } });
+			SetError("");
+			SetUserInput(initialTask);
+			const calendar = document.getElementById(
+				"deadline-calendar"
+			) as HTMLInputElement;
+			calendar.value = calendar.defaultValue;
+		}
 	}
 
 	return (
@@ -51,11 +57,15 @@ export function TaskForm() {
 					min={JSON.stringify(yesterday).slice(1, 11)}
 					type="date"
 				/>
+				{error && <p className="error text-red-500   ">{error}</p>}
 				<select
 					name="Topic"
 					required
 					id="topic"
 					value={userInput.topic}
+					onMouseDown={() => {
+						SetError("");
+					}}
 					onChange={(event) => {
 						SetUserInput({ ...userInput, topic: event.target.value });
 					}}

@@ -45,31 +45,37 @@ export const ACTIONS = {
 	CHANGE_NAME: "change name",
 	DELETE: "delete",
 	CONFIRM_CHANGE: "confirm change",
+	PRIORITY: "toggle priority",
 };
 
 function tasksReducer(tasks: Tasks, action: Action): Tasks {
 	switch (action.type) {
 		case ACTIONS.ADD_TASK:
 			return [...tasks, newTask(action.payload.userInput)];
-		case ACTIONS.CHANGE_DEADLINE: {
-			console.log("change deadline", action);
+		case ACTIONS.CHANGE_DEADLINE:
 			return tasks.map((task) => {
-				if (task.id === action.payload.taskId) {
-					console.log("object matches", task);
-					return { ...task, deadline: new Date(action.payload.deadline) };
+				if (task.id === action.payload.id) {
+					return { ...task, deadline: action.payload.deadline };
 				} else return task;
 			});
-		}
-		case ACTIONS.CHANGE_NAME: {
-			console.log("dispatch run", action.payload);
-			const newTasks = tasks.map((task) => {
+		case ACTIONS.CHANGE_NAME:
+			return tasks.map((task) => {
 				if (task.id === action.payload.id) {
 					return { ...task, name: action.payload.name };
 				} else return task;
 			});
-			console.log(newTasks);
-			return newTasks;
-		}
+		case ACTIONS.CHANGE_TOPIC:
+			return tasks.map((task) => {
+				if (task.id === action.payload.id) {
+					return { ...task, topic: action.payload.topic };
+				} else return task;
+			});
+		case ACTIONS.PRIORITY:
+			return tasks.map((task) => {
+				if (task.id === action.payload.id) {
+					return { ...task, priority: !task.priority };
+				} else return task;
+			});
 		case ACTIONS.COMPLETED:
 			return tasks.map((task) => {
 				if (task.id === action.payload.id) {

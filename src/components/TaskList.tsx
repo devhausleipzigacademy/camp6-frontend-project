@@ -4,7 +4,6 @@ import { TaskProp, Tasks, yesterday } from "../database/TypesNConsts";
 import {
 	ACTIONS,
 	CreateContext,
-	TasksProvider,
 	useTasks,
 	useTasksDispatch,
 } from "./TasksContext";
@@ -17,33 +16,18 @@ export function TaskList() {
 	}
 
 	return (
-		<>
-			{/* 
-// 
-// Hi! 
-// Please delete the br and h2 tag below. 
-// Thanks!
-//  */}
-			<br />
-			<h2 className="subheading">Task List Component</h2>
-
-			<ul>
-				{tasks.map((task) => (
-					<li
-						key={task.id}
-						className="flex w-1/2 p-4 border-slate-700 border-2 rounded-md justify-between items-center"
-					>
-						<TaskItem task={task} />
-					</li>
-				))}
-			</ul>
-		</>
+		<ul>
+			{tasks.map((task) => (
+				<li
+					key={task.id}
+					className="flex w-1/2 p-4 border-slate-700 border-2 rounded-md justify-between items-center"
+				>
+					<TaskItem task={task} />
+				</li>
+			))}
+		</ul>
 	);
 }
-
-type TaskProp = {
-	task: Task;
-};
 
 function TaskItem({ task }: TaskProp) {
 	// I will probably need these here
@@ -108,46 +92,31 @@ function TaskItem({ task }: TaskProp) {
 				<input
 					type="text"
 					value={taskNameInput}
-					// onBlur={(event) => {
-					//   event.preventDefault();
-					//   console.log("blur");
-					//   setIsEditing(false);
-					// }}
 					onChange={(event) => {
 						setTaskNameInput(event.target.value);
 					}}
 				/>
-				{/* 
-well actually, erm, this button 
-does not save but only closes 
-the input field. it is already 
-saved no matter what... 
-*/}
-				{taskNameInput}
-				{task.id}
+
 				<button
 					className="flex justify-center items-center  bg-primary w-2 h-4 p-4 rounded-lg"
 					onClick={() => {
-						console.log(" dispatch");
-
 						dispatch({
 							type: ACTIONS.CHANGE_NAME,
 							payload: { id: task.id, name: taskNameInput },
 						});
 						setIsEditing(false);
-						console.log(" dispatch");
 					}}
 				>
 					Save
 				</button>
 				<button
-					className="flex justify-center items-center  bg-primary w-2 h-4 p-4 rounded-lg"
+					className="flex justify-center items-center  bg-primary w-fit h-4 p-4 rounded-lg"
 					onClick={() => {
 						setTaskNameInput(task.name);
 						setIsEditing(false);
 					}}
 				>
-					Cancel
+					Discard
 				</button>
 			</>
 		);
@@ -166,7 +135,6 @@ saved no matter what...
 	return (
 		<>
 			{taskContent}
-			{/* beginnging	 */}
 			<div className="flex hover:scale-110 hover:fill-slate-500 hover:text-slate-500 active:text-inherit active:fill-inherit">
 				<svg
 					id="calendar"
@@ -181,15 +149,14 @@ saved no matter what...
 				</svg>
 				<input
 					required
-					// value={JSON.stringify(task.deadline).slice(1, 11)}
+					value={JSON.stringify(task.deadline).slice(1, 11)}
 					name="deadline"
-					value={task.deadline.toISOString()}
 					onChange={(event) => {
 						dispatch({
 							type: ACTIONS.CHANGE_DEADLINE,
 							payload: {
-								taskId: task.id,
-								deadline: event.target.value,
+								id: task.id,
+								deadline: new Date(event.target.value),
 							},
 						});
 					}}
@@ -198,8 +165,43 @@ saved no matter what...
 					type="date"
 				/>
 			</div>
-			{/* end	 */}
-			<p>{task.topic}</p>
+
+			<select
+				name="Topic"
+				required
+				value="{task.topic}"
+				onChange={(event) => {
+					dispatch({
+						type: ACTIONS.CHANGE_TOPIC,
+						payload: {
+							id: task.id,
+							topic: event.target.value,
+						},
+					});
+				}}
+			>
+				<option disabled>(please select)</option>
+				{topicsDummies.map((element, idx) => (
+					<option key={idx} value={element}>
+						{element}
+					</option>
+				))}
+			</select>
+
+			<div className="flex items-center gap-2">
+				<input
+					type="checkbox"
+					name="priority"
+					checked={task.priority}
+					onChange={() => {
+						dispatch({ type: ACTIONS.PRIORITY, payload: { id: task.id } });
+					}}
+				/>
+				<label className="text-slate-500 text-sm" htmlFor="priority">
+					Priority?
+				</label>
+			</div>
+
 			<div className="flex items-center gap-2">
 				<input
 					type="checkbox"
