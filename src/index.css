@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* We can use this selector to target active NavLinks */
+a.active {
+	@apply text-secondary;
+}
+
 p {
 	@apply font-bodyText font-normal;
 }
