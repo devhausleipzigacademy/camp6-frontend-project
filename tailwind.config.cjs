@@ -4,18 +4,21 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				primary: "#73C2FB",
-				secondary: "#FFC8A6",
+				primary: "#FFC8A6",
+				primarylight: " #FCE4D5",
+				secondary: "#73C2FB",
 				customPink: "#FFADC5",
 				customGreen: "#A1CB9B",
 				customYellow: "#FCF8C0",
+				customTextColor: "#414141",
+				whiteTransparent: "rgba(255,255,255, 0.9)",
 			},
 			fontFamily: {
 				logo: "Comfortaa",
 				heading: "Poppins",
 				subheading: "Poppins",
 				tag: "Poppins",
-				bodyText: "Work Sans",
+				bodyText: "Open Sans",
 			},
 		},
 	},

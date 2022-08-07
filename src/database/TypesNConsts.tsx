@@ -15,6 +15,17 @@ export type ChildrenProps = {
 	children: ReactNode;
 };
 
+export type CustomButtonProps = {
+	text?: string;
+	clickHandler: any;
+};
+
+export type CustomSwitchProps = {
+	text?: string;
+	value: boolean | undefined;
+	clickHandler: any;
+};
+
 export const now = new Date();
 export const yesterday: Date = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
@@ -64,4 +75,24 @@ export type TaskProp = {
 
 export type Tasks = Task[];
 
+export type TimerAction = {
+	type: string;
+	payload?: any;
+};
+
 export type TimerDisplay = "Work" | "Break";
+
+export type TimerValues = {
+	activeTime: 0 | 1;
+	minutesRemaining: number;
+	paused: boolean;
+	secondsRemaining: number;
+	timeIntervals: [number, number];
+	timerDisplay: string;
+	timerEnded: boolean;
+	track: string;
+	topic: string;
+	task: string;
+	selector: number;
+	timerState: JSX.Element;
+};

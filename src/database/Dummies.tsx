@@ -4,6 +4,8 @@ import { now, Resource, Resources, Task, Tasks } from "./TypesNConsts";
 
 // In alphabetical order
 
+export const breakLengthDefault: number = 5;
+
 export const ResourceDummy: Resource = {
 	title: "Simple trick to learn faster",
 	hyperlink: "https://lmgtfy.app/",
@@ -82,3 +84,5 @@ export const userDummy = {
 	name: "Fatma",
 	image: "https://images.unsplash.com/photo-1523824921871-d6f1a15151f1",
 };
+
+export const workLengthDefault: number = 10;
