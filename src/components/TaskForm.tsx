@@ -32,6 +32,7 @@ export function TaskForm() {
 
 	return (
 		<>
+			<h2 className="self-start ">Add Task</h2>
 			<form onSubmit={handleSubmit} className="flex flex-col p-6 gap-6">
 				<input
 					required

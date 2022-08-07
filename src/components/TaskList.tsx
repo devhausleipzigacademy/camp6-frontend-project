@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { topicsDummies } from "../database/Dummies";
-import { TaskProp, Tasks, yesterday } from "../database/TypesNConsts";
 import {
-	ACTIONS,
+	TaskProp,
+	Tasks,
 	CreateContext,
-	useTasks,
-	useTasksDispatch,
-} from "./TasksContext";
+	yesterday,
+} from "../database/TypesNConsts";
+import { ToggleSwitch } from "./buttons/ToggleSwitch";
+import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
 
 export function TaskList() {
 	const tasks = useTasks() as Tasks;
@@ -20,7 +21,7 @@ export function TaskList() {
 			{tasks.map((task) => (
 				<li
 					key={task.id}
-					className="flex w-1/2 p-4 border-slate-700 border-2 rounded-md justify-between items-center"
+					className="flex w-full p-4 border-slate-300 border-2 rounded-md justify-between items-center  gap-2"
 				>
 					<TaskItem task={task} />
 				</li>
@@ -135,7 +136,7 @@ function TaskItem({ task }: TaskProp) {
 	return (
 		<>
 			{taskContent}
-			<div className="flex hover:scale-110 hover:fill-slate-500 hover:text-slate-500 active:text-inherit active:fill-inherit">
+			<div className="flex hover:scale-110 hover:fill-slate-300 hover:text-slate-300 active:text-inherit active:fill-inherit">
 				<svg
 					id="calendar"
 					className="w-4"
@@ -188,17 +189,25 @@ function TaskItem({ task }: TaskProp) {
 				))}
 			</select>
 
-			<div className="flex items-center gap-2">
-				<input
+			<div className="flex items-center   gap-2">
+				<ToggleSwitch
+					clickHandler={() => {
+						dispatch({ type: ACTIONS.PRIORITY, payload: { id: task.id } });
+					}}
+					value={task.priority}
+				></ToggleSwitch>
+				{/* <label htmlFor="priority-switch"><input id="priority-switch"
 					type="checkbox"
 					name="priority"
 					checked={task.priority}
 					onChange={() => {
 						dispatch({ type: ACTIONS.PRIORITY, payload: { id: task.id } });
 					}}
-				/>
+				/>{" "}
+				<div></div>
+				<span className="slider"></span></label> */}
 				<label className="text-slate-500 text-sm" htmlFor="priority">
-					Priority?
+					Is important
 				</label>
 			</div>
 
