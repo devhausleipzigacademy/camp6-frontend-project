@@ -18,7 +18,7 @@ Subheading: Poppins Semibold -> CSS class subheading
 
 Tags: Poppins Semibold -> CSS class tag
 
-Paragraph: Work Sans -> CSS applied to all <p>
+Paragraph: Work Sans -> CSS applied to all <\p>
 
 ## Tailwind Colors
 
