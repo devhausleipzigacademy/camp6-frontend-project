@@ -1,4 +1,4 @@
-export function FeedSVG() {
+export function StarSVG() {
 	return (
 		<svg
 			className="w-full h-full"
