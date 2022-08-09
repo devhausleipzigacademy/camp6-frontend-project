@@ -1,7 +1,9 @@
+import Api from "../components/buttons/Feed/Api";
+
 export default function Feed() {
-  return (
-    <div>
-      <span>Feed</span>
-    </div>
-  );
+	return (
+		<>
+			<Api />
+		</>
+	);
 }
