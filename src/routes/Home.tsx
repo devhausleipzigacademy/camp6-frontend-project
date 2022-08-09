@@ -1,21 +1,30 @@
-import { TaskList } from "../components/TaskList";
+import { RecommendedHome } from "../components/RecommendedHome";
+import { StatusHome } from "../components/StatusHome";
+import { TaskListHome } from "../components/TaskListHome";
 import { TasksProvider } from "../components/TasksContext";
+import { userDummy } from "../database/Dummies";
 
 export default function Home() {
-	return (
-		<div className="flex flex-col items-center h-full w-full bg-whiteTransparent rounded-xl shadow-md">
-			<span>Home</span>
-			<TasksProvider>
-				{/* 
-				// 
-				FYI TaskForm and TaskList only work if wrapped in TasksProvider
-				// 
-				*/}
-				{/* <TaskForm /> */}
-				<h2 className="subheading  mt-6">Task List</h2>
+  return (
+    <div className="flex flex-col gap-4 h-full w-full">
+      <h2 className=" text-4xl font-light ">
+        Welcome back, {userDummy.name}!{" "}
+      </h2>
 
-				<TaskList />
-			</TasksProvider>
-		</div>
-	);
+      <div id="upperElements" className="w-full h-1/2 flex flex-row gap-4 ">
+        <div id="upcomingTasks" className=" w-2/3 h-full card-style">
+          {" "}
+          <TasksProvider>
+            <TaskListHome />
+          </TasksProvider>
+        </div>
+        <div id="statusBoard" className="w-1/3 h-full  card-style">
+          <StatusHome />
+        </div>
+      </div>
+      <div id="recommendedBlogposts" className="w-full h-1/2  card-style">
+        <RecommendedHome />
+      </div>
+    </div>
+  );
 }
