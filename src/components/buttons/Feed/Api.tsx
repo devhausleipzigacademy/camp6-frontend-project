@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { data } from "autoprefixer";
 import { Searchbar } from "./SearchBar";
 
-import Trial from "./Youtube/SearchedFeed";
+import SearchedFeed from "./Youtube/SearchedFeed";
 import { Youtube } from "./Youtube/YoutubeConfig";
 export default function Api() {
 	const [articles, setArticles] = useState([]);
@@ -43,10 +43,9 @@ export default function Api() {
 
 	return (
 		<>
-			<div className="flex  flex-col ">
+			<div className="">
 				<Searchbar subReddit={subReddit} setSubReddit={setSubReddit} />
-				<Youtube />
-				<Trial />
+				<SearchedFeed />
 			</div>
 		</>
 	);
