@@ -13,7 +13,7 @@ export default function SideBar() {
 
 	return (
 		<>
-			<div className="flex h-full w-fit  flex-col justify-between ">
+			<div className="flex h-full w-fit mt-32 flex-col justify-between ">
 				<nav className="flex flex-col items-start  h-fit w-full shadow-md rounded-xl bg-whiteTransparent gap-6 p-6">
 					<NavLink className="navlink h-5 flex flex-row gap-6" to="/">
 						{" "}
