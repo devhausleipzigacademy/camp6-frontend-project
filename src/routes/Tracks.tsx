@@ -1,7 +1,7 @@
-export default function Trcks() {
-	return (
-		<div>
-			<span>Tracks</span>
-		</div>
-	);
+export default function Tracks() {
+  return (
+    <div>
+      <span>Tracks</span>
+    </div>
+  );
 }
