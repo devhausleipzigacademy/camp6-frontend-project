@@ -1,7 +1,7 @@
 export default function Topics() {
-  return (
-    <div>
-      <span>Topics</span>
-    </div>
-  );
+	return (
+		<div>
+			<span>Topics</span>
+		</div>
+	);
 }

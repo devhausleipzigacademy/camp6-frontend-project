@@ -1,4 +1,4 @@
-export default function Trcks() {
+export default function Tracks() {
   return (
     <div>
       <span>Tracks</span>
