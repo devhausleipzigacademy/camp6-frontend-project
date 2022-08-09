@@ -1,4 +1,4 @@
-export function FeedSVG() {
+export function PencilSVG() {
 	return (
 		<svg
 			className="w-full h-full"
