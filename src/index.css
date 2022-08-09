@@ -99,3 +99,30 @@ The following three classes are used for the toggle switch. I thought it easier 
 		@apply bg-primary border-primary;
 	}
 }
+
+.navlink {
+	@apply font-subheading;
+}
+
+/* We can use this selector to target active NavLinks */
+a.active {
+	@apply text-primary fill-primary;
+}
+
+/*
+
+The following three classes are used for the toggle switch. I thought it easier to read and change if written in here rather than inline.
+
+*/
+
+.toggle-bg:after {
+	content: "";
+	@apply absolute top-0.5 left-0.5 bg-whiteTransparent border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+}
+input:checked + .toggle-bg:after {
+	transform: translateX(100%);
+	@apply border-whiteTransparent;
+}
+input:checked + .toggle-bg {
+	@apply bg-primary border-primary;
+}

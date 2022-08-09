@@ -1,4 +1,5 @@
-export function FeedSVG() {
+
+export function ArrowUpSVG() {
 	return (
 		<svg
 			className="w-full h-full"

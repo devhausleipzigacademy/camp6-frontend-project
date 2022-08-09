@@ -1,4 +1,5 @@
-export function FeedSVG() {
+
+export function CrossSVG() {
 	return (
 		<svg
 			className="w-full h-full"
