@@ -11,13 +11,13 @@ export function StatusHome() {
 
   if (taskCompletionPercentage > 50) {
     completionMessage = (
-      <p className="text-sm w-1/2">
+      <p className="text-xs w-1/2">
         Great work! You’ve completed the majority of your tasks.
       </p>
     );
   } else {
     completionMessage = (
-      <p className="text-sm w-7/12 text-center  ">
+      <p className="text-xs w-7/12 text-center  ">
         You have completed less than half your tasks. Keep it up!
       </p>
     );
