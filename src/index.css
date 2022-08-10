@@ -60,7 +60,7 @@ Please note that som universal styles are applied directly inside the index html
   }
 
   .card-style {
-    @apply rounded-xl shadow-md bg-whiteTransparent p-5;
+    @apply rounded-xl shadow-md bg-whiteTransparent p-4;
   }
 
   .heading {
