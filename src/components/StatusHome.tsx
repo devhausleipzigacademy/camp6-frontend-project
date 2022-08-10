@@ -25,7 +25,8 @@ export function StatusHome() {
 
   return (
     <>
-      <div className="p-4 gap-2 w-full h-full flex flex-col items-center justify-between">
+      <h3 className="card-heading">Your Progress</h3>
+      <div className="p-4 gap-2 w-full h-5/6 flex flex-col items-center justify-between">
         <svg
           className="fill-primary h-28 flex self-center justify-center "
           viewBox="0 0 120 120"
