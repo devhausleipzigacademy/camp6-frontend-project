@@ -19,8 +19,8 @@
                     Please note that som universal styles are applied directly inside the index html body while most styles are applied inside the various tsx files.
 
                     */
-                    
-                    # @layer base {
+
+                     @layer base {
                         p {
                             @apply font-bodyText text-customTextColor;
                         }
@@ -36,7 +36,7 @@
                             @apply fill-customTextColor;
                         }
                     }
-                    
+
                     @layer components {
                         .background-gradient-option1 {
                             background: radial-gradient( 49.92% 154.77% at 0% 0%, #73c2fb 12.29%, rgba(115, 194, 251, 0) 100%)
@@ -61,6 +61,9 @@
                         .tag {
                             @apply uppercase font-subheading;
                         }
+                         .card-style {
+    @apply rounded-xl shadow-md bg-whiteTransparent p-4;
+  }
                         .navlink {
                             @apply font-subheading;
                         }
@@ -69,7 +72,7 @@
                             @apply text-primary fill-primary;
                         }
                     }
-                    
+
                     @layer utilities {
                         /*
 
@@ -88,12 +91,12 @@
                             @apply bg-primary border-primary;
                         }
                     }
-                    
+
                     .navlink {
                         @apply font-subheading;
                     }
                     /* We can use this selector to target active NavLinks */
-                    
+
                     a.active {
                         @apply text-primary fill-primary;
                     }
@@ -102,17 +105,17 @@
                     The following three classes are used for the toggle switch. I thought it easier to read and change if written in here rather than inline.
 
                     */
-                    
+
                     .toggle-bg:after {
                         content: "";
                         @apply absolute top-0.5 left-0.5 bg-whiteTransparent border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
                     }
-                    
+
                     input:checked+.toggle-bg:after {
                         transform: translateX(100%);
                         @apply border-whiteTransparent;
                     }
-                    
+
                     input:checked+.toggle-bg {
                         @apply bg-primary border-primary;
                     }

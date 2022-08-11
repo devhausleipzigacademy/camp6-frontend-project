@@ -10,6 +10,7 @@ module.exports = {
         customPink: "#FFADC5",
         customGreen: "#A1CB9B",
         customYellow: "#FCF8C0",
+        customTextColor: "#414141",
         customTextColorDark: "RGBA(65,65,65,1)",
         customTextColorMedium: "RGBA(65,65,65,0.75)",
         customTextColorLight: "RGBA(65,65,65,0.35)",
