@@ -7,13 +7,13 @@ import { tracksDummies } from "../database/Dummies";
 import { Timer } from "./Timer";
 
 export default function SideBar() {
-	const tracksList = tracksDummies.map((track, idx) => (
-		<li key={idx}>{track}</li>
-	));
+  const tracksList = tracksDummies.map((track, idx) => (
+    <li key={idx}>{track}</li>
+  ));
 
 	return (
 		<>
-			<div className="flex h-full w-fit mt-32 flex-col justify-between ">
+			<div className="flex h-full w-fit  flex-col mt-32 justify-between ">
 				<nav className="flex flex-col items-start  h-fit w-full shadow-md rounded-xl bg-whiteTransparent gap-6 p-6">
 					<NavLink className="navlink h-5 flex flex-row gap-6" to="/">
 						{" "}
