@@ -15,6 +15,9 @@ module.exports = {
         customTextColorLight: "RGBA(65,65,65,0.35)",
         whiteTransparent: "rgba(255,252,252, 0.8)",
       },
+      spacing: {
+        34: "136px",
+      },
       fontFamily: {
         logo: "Comfortaa",
         heading: "Poppins",
