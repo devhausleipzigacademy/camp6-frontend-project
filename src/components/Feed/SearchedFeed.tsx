@@ -10,8 +10,8 @@ import { taskDummy, tasksDummies, tracksDummies } from "../../database/Dummies";
 export default function SearchedFeed({ task }: any) {
 	const [articles, setArticles] = useState([]);
 	const [search, setSearch] = useState("");
-	const [query, setQuery] = useState("news");
-	const [limit, setLimit] = useState("14");
+	const [query, setQuery] = useState("photography");
+	const [limit, setLimit] = useState("100");
 	const [save, setSave] = useState("");
 
 	useEffect(() => {
@@ -101,15 +101,23 @@ export default function SearchedFeed({ task }: any) {
 			<div className="flex  relative flex-col  pl-10 h-full w-full mt-20 no-scrollbar items-center justify-evenly  gap-20">
 				{articles
 					.filter((post) =>
-						!post.data.is_gallery &&
-						post.data.domain === "i.imgur.com" &&
-						post.data.domain === "i.redd.it"
-							? false
-							: true && !post.data.is_video
+					post.data.post_hint==='image'?true:false
+
+
 					)
 					.map((post) => (
 						<>
 							<div className="h-full w-fit p-10 flex text-sm    rounded-2xl relative text-black flex-col  bg-white">
+<svg xmlns="http://www.w3.org/2000/svg" className="h-6 absolute  hover:fill-green-500 active:fill-purple-500 -top-6 right-2 w -6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+</svg>
+<svg xmlns="http://www.w3.org/2000/svg" className="h-6 absolute -left-2 -top-7 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+</svg>
+
+<p className="absolute text-xsm  -top-6  left-4">{post.data.ups}  times Up voted </p>
+							<p className="text-[9px] absolute right-10 -top-4">{post.data.subreddit_name_prefixed}</p>
+							<p className="  absolute top-1 text-[10px]">posted by u/{post.data.author}</p>
 								<p className="font-medium ">{post.data.title}</p>
 								<p>{post.data.selftext}</p>
 								<a href={redditUrl + post.data.permalink}>
@@ -120,11 +128,15 @@ export default function SearchedFeed({ task }: any) {
 									/>
 								</a>
 								<img
-									className="h-[25rem] w-fit self-center    rounded-2xl p-4 "
-									src={post.data.url}
+									className="h-[30rem]  self-center    rounded-2xl p-4 "
+									src={post.data.url_overridden_by_dest}
 									alt=""
 								/>
 								<p>{post.data.selftext}</p>
+							<a href={redditUrl + post.data.permalink}>	<p className="text-center hover:scale-[105%] hover:underline mt-2">{post.data.num_comments} <br/> comments </p></a>
+								<svg xmlns="http://www.w3.org/2000/svg" className="h-5 self-center hover:scale-[110%] w-5" viewBox="0 0 20 20" fill="currentColor">
+  <path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd" />
+</svg>
 							</div>
 						</>
 					))}
