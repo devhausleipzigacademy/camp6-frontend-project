@@ -189,26 +189,13 @@ function TaskItem({ task }: TaskProp) {
 				))}
 			</select>
 
-			<div className="flex items-center   gap-2">
+			<div className="flex items-center gap-2">
 				<ToggleSwitch
 					clickHandler={() => {
 						dispatch({ type: ACTIONS.PRIORITY, payload: { id: task.id } });
 					}}
 					value={task.priority}
-				></ToggleSwitch>
-				{/* <label htmlFor="priority-switch"><input id="priority-switch"
-					type="checkbox"
-					name="priority"
-					checked={task.priority}
-					onChange={() => {
-						dispatch({ type: ACTIONS.PRIORITY, payload: { id: task.id } });
-					}}
-				/>{" "}
-				<div></div>
-				<span className="slider"></span></label> */}
-				<label className="text-slate-500 text-sm" htmlFor="priority">
-					Is important
-				</label>
+				/>
 			</div>
 
 			<div className="flex items-center gap-2">
