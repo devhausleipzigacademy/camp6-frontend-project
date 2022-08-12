@@ -9,7 +9,7 @@ import { taskDummy, tasksDummies } from "../../database/Dummies";
 import { tracksDummies } from "../../database/newDummies";
 
 import { Console } from "console";
-import { Post } from "../Post";
+import { Post } from "./Post";
 
 export default function SearchedFeed({ task }: any) {
 	const [articles, setArticles] = useState([] as Array);
@@ -80,12 +80,6 @@ export default function SearchedFeed({ task }: any) {
 	function submit(event: any) {
 		event.preventDefault();
 		setQuery(search);
-	}
-
-	function saving() {
-		setIsSaved(true);
-		if (isSaved) {
-		}
 	}
 
 	function dropDown() {
