@@ -1,45 +1,26 @@
-import { TaskList } from "./components/TaskList";
-import { TaskForm } from "./components/TaskForm";
-import { Timer } from "./components/Timer";
-import { TasksProvider } from "./components/TasksContext";
 import { Outlet } from "react-router-dom";
 import SideBar from "./components/SideBar";
+import { Header } from "./components/Header";
 
 export default function App() {
-	return (
-		<div className="App">
-			<header className="flex flex-col items-center gap-4 bg-primary">
-				<h1 className="heading">Camp 6 Frontend Project</h1>
-				<h2>Personal Curriculum</h2>
-				<h3 className="subheading">Features</h3>
-			</header>
+  return (
+    <div className="App">
+      <div
+        id="background"
+        className="background-gradient-option1 fixed -z-10 h-screen w-screen  "
+      ></div>
+      <header className="flex flex-row justify-between shadow-md h-20 top-0 fixed w-screen items-center gap-4 p-6 bg-whiteTransparent">
+        <Header />
+      </header>
 
-			<main className="flex">
-				<div className="flex flex-col w-1/6 h-screen bg-slate-400">
-					<SideBar />
-				</div>
-				<div className="flex flex-col items-center w-5/6 h-screen bg-customGreen ">
-					<TasksProvider>
-						{/* 
-				// 
-				FYI TaskForm and TaskList only work if wrapped in TasksProvider
-				// 
-				*/}
-						<div className="border-solid border-2 border-primary  mt-6">
-							<h2 className="subheading">Task Form Component</h2>
-							<TaskForm />{" "}
-						</div>
-						<h2 className="subheading  mt-6">Task List</h2>
-
-						<TaskList />
-					</TasksProvider>
-					<div className="w-1/4  mt-6">
-						<h2 className="subheading">Timer</h2>
-						<Timer />
-					</div>
-					<Outlet />
-				</div>
-			</main>
-		</div>
-	);
+      <main className="background-gradient-option1 flex flex-row justify-between w-full h-screen gap-6 p-6 pt-24">
+        <div className="flex flex-col justify-between">
+          <SideBar />
+        </div>
+        <div className="w-full overflow-y-auto">
+          <Outlet />
+        </div>
+      </main>
+    </div>
+  );
 }
