@@ -1,4 +1,4 @@
-import { tasksDummies, trackDummy } from "../database/Dummies";
+import { trackDummy } from "../database/Dummies";
 
 export function StatusHome() {
   const allTasks =

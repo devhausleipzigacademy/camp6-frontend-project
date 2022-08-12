@@ -145,6 +145,13 @@ export const tracksDummies: Track[] = [
             priority: false,
             completed: false,
           },
+        ],
+      },
+      {
+        title: "Loops",
+        id: 782434,
+        complete: false,
+        tasks: [
           {
             id: 18,
             name: "Read about loops",
@@ -185,6 +192,13 @@ export const tracksDummies: Track[] = [
             priority: false,
             completed: false,
           },
+        ],
+      },
+      {
+        title: "If Statements",
+        id: 78600,
+        complete: false,
+        tasks: [
           {
             id: 23,
             name: "Read about if statements",
@@ -499,15 +513,12 @@ export const tracksDummies: Track[] = [
       },
     ],
   },
-  // {
-  // 	title: "Guitar",
-  // 	id: 13464575674545,
-  // 	complete: false,
-  // 	topics: [{}],
-  // },
+];
 
-  // "Cooking",
-  // "Tap Dance",
-  // "React",
-  // "Japanese",
+export const colorsArray = [
+  "bg-customYellowLight",
+  "bg-customGreenLight",
+  "bg-customPinkLight",
+  "bg-secondaryLight",
+  "bg-customPurpleLight",
 ];
