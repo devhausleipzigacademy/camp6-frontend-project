@@ -15,7 +15,7 @@ export default function SearchedFeed({ task }: any) {
 	const [save, setSave] = useState("");
 
 	useEffect(() => {
-		fetch(`https://www.reddit.com/search.json?limit=${limit}&q=${query}&count=2
+		fetch(`https://www.reddit.com/search.json?limit=${limit}&q=${query}&top
 		`).then((result) => {
 			if (result.status != 200) {
 				console.log("ERRPORR, BRUVVV");
@@ -44,6 +44,21 @@ export default function SearchedFeed({ task }: any) {
 		setQuery(search);
 	}
 
+const[popUp,setPopUp]=useState("hidden opacity-0")
+
+
+function popUps(){
+	setPopUp("opacity-0 flex")
+
+}
+
+
+
+
+
+
+
+
 	console.log(query);
 
 	function dropDown() {
@@ -54,6 +69,8 @@ export default function SearchedFeed({ task }: any) {
 	return (
 		<div className=" ">
 			<Youtube />
+
+
 
 			<div className="flex flex-row mt-10 items-end justify-between">
 				<div className="inline-block   relative w-64">
@@ -108,9 +125,21 @@ export default function SearchedFeed({ task }: any) {
 					.map((post) => (
 						<>
 							<div className="h-full w-fit p-10 flex text-sm    rounded-2xl relative text-black flex-col  bg-white">
-<svg xmlns="http://www.w3.org/2000/svg" className="h-6 absolute  hover:fill-green-500 active:fill-purple-500 -top-6 right-2 w -6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-</svg>
+
+<button onClick={popUps}>
+	<svg    xmlns="http://www.w3.org/2000/svg" className="h-6 absolute bg  hover:fill-green-500 active:fill-purple-500 -top-6 right-2 w -6" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+	</svg>
+</button>
+
+	<div id="popUp"   className={`   flex-col ${popUp} duration-1000  absolute -top-3 -right-32 rounded-md w-32 bg-black`}>
+			{tracksDummies.map((x,idx)=>(
+<p  className="text-white rounded-md active:text-[15px] hover:scale-[105%] active:text-yellow-300 border-b-2 p-2">{tracksDummies[idx]}</p>
+
+
+			))}
+			</div>
+
 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 absolute -left-2 -top-7 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
   <path stroke-linecap="round" stroke-linejoin="round" d="M7 11l5-5m0 0l5 5m-5-5v12" />
 </svg>
