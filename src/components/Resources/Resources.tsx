@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { tracksDummies } from "../../database/Dummies";
+import { tracksDummies } from "../../database/newDummies";
+
 export function Resources() {
 	let array = new Array(20).fill("https://cataas.com/cat", 0, 20);
 	console.log(array);
@@ -28,9 +29,12 @@ export function Resources() {
 		<div className="  grid grid-flow-col  gap-5  grid-cols-3 grid-rows-2 ">
 			{tracksDummies.map((folders, indx) => (
 				<>
-					<div className="flex  w-fit flex-col    p-2 h-fit rounded-xl bg-slate-200">
+					<div
+						id=""
+						className="flex  w-fit flex-col    p-2 h-fit rounded-xl bg-slate-200"
+					>
 						<div className="flex flex-row gap-x-3    items-center  ">
-							<h1 className="text-3xl  mb-5 ml-2">{tracksDummies[indx]}</h1>
+							<h1 className="text-3xl  mb-5 ml-2">{folders.title}</h1>
 							<p className="text-xs">27 itemss</p>
 						</div>
 						<div className="grid rounded-lg grid-cols-4 p-1 grid-rows-4 gap-5 h-fit  bg-blue-300">
