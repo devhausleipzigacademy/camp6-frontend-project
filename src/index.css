@@ -19,6 +19,11 @@
                     Please note that som universal styles are applied directly inside the index html body while most styles are applied inside the various tsx files.
 
                     */
+                    #sav{
+                       animation:animate__tada
+
+
+                    }
 
                      @layer base {
                         p {

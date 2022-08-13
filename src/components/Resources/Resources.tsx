@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import { tracksDummies } from "../../database/newDummies";
+import {resourcesList} from "../Feed/Post"
 
 export function Resources() {
-	let array = new Array(20).fill("https://cataas.com/cat", 0, 20);
+	let array = new Array(20).fill("https://cataas.com/cat", 0, );
 	console.log(array);
 	const [limit, setLimit] = useState(10);
 	const [articles, setArticles] = useState([]);
 
+
+
+
+
+
+
+	console.log(resourcesList)
 	useEffect(() => {
-		fetch(`https://www.reddit.com/search.json?limit=10&q=RandomPics
+		fetch(`https://www.reddit.com/search.json?limit=2&q=RandomPics
 		`).then((result) => {
 			if (result.status != 200) {
 				console.log("ERRPORR, BRUVVV");
@@ -19,25 +27,25 @@ export function Resources() {
 				}
 			});
 		});
-	}, [1000]);
+	}, );
 
 	let height = tracksDummies.length;
 
 	function resourceFolders() {}
 
 	return (
-		<div className="  grid grid-flow-col  gap-5  grid-cols-3 grid-rows-2 ">
-			{tracksDummies.map((folders, indx) => (
+		<div className="  grid grid-flow-col   gap-5  grid-cols-3 grid-rows-2 ">
+			{resourcesList.map((folders, indx) => (
 				<>
 					<div
 						id=""
-						className="flex  w-fit flex-col    p-2 h-fit rounded-xl bg-slate-200"
+						className="grid   w-full  p-2  rounded-xl bg-slate-200"
 					>
 						<div className="flex flex-row gap-x-3    items-center  ">
-							<h1 className="text-3xl  mb-5 ml-2">{folders.title}</h1>
-							<p className="text-xs">27 itemss</p>
+							<h1 className="text-3xl  mb-5 ml-2">{folders}</h1>
+							<p className="text-xs">27 items</p>
 						</div>
-						<div className="grid rounded-lg grid-cols-4 p-1 grid-rows-4 gap-5 h-fit  bg-blue-300">
+						<div className="grid rounded-lg  grid-cols-4 p-1 grid-rows-4 gap-5 h-fit  bg-blue-300">
 							{array
 								.map((item, index) => (
 									<img

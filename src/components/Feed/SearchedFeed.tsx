@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Task } from "../../database/TypesNConsts";
+
 import { data } from "autoprefixer";
 import { Searchbar } from "./SearchBar";
 import { setInterval } from "timers/promises";
@@ -14,7 +15,7 @@ import { Post } from "./Post";
 export default function SearchedFeed({ task }: any) {
 	const [articles, setArticles] = useState([] as Array);
 	const [search, setSearch] = useState("");
-	const [query, setQuery] = useState(tracksDummies[0].title);
+ const [query, setQuery] = useState(tracksDummies[0].title);
 	const [limit, setLimit] = useState("100");
 	const [save, setSave] = useState("");
 	const [isHidden, setIsHidden] = useState(true);
@@ -31,7 +32,7 @@ export default function SearchedFeed({ task }: any) {
 		return arr;
 	}
 	useEffect(() => {
-		console.log(articles);
+
 	}, [articles]);
 	useEffect(() => {
 		if (query === "Random") {
@@ -42,7 +43,7 @@ export default function SearchedFeed({ task }: any) {
 			).then((listOfResponses) => {
 				Promise.all(
 					listOfResponses.map(async (response) => {
-						console.log(response);
+
 
 						return await response.json().then((responseObj) => {
 							return responseObj.data.children;
@@ -64,13 +65,13 @@ export default function SearchedFeed({ task }: any) {
 				});
 			});
 		}
-	}, [query]);
+	},[query]);
 
 	let color = "";
 	function colorChange() {
 		color = "fill-red-300";
 
-		console.log(color);
+
 	}
 	colorChange();
 	function searchBar(e: any) {
@@ -136,8 +137,7 @@ export default function SearchedFeed({ task }: any) {
 			<div className="flex  relative flex-col  pl-10 h-full w-full mt-20 no-scrollbar items-center justify-evenly  gap-20">
 				{articles
 					.filter((post: any) =>
-						post.data.post_hint === "image" ? true : false
-					)
+						post.data.post_hint === "image" ? true : false && post.data.domain==="i.imgur.com")
 					.map((post: any) => (
 						<Post data={post.data} />
 					))}
