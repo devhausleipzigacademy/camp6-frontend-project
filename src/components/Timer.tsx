@@ -16,6 +16,7 @@ import { CustomButton } from "./buttons/custombutton";
 import { PauseButton } from "./buttons/PauseButton";
 import { StopButton } from "./buttons/StopButton";
 import { RestartButton } from "./buttons/RestartButton";
+import { useTasks } from "./TasksContext";
 
 //
 // Reducer Actions hardcoded
@@ -127,6 +128,7 @@ export function Timer() {
 	//
 	// Bindings
 	//
+	const tasks = useTasks();
 
 	// bindings for timer lengths and switching between work and break time
 	// At some point we can add a function manually set the workLength

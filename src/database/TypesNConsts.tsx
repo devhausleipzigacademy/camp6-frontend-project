@@ -11,10 +11,6 @@ export type Action = {
 
 export type CreateContext = Dispatch<Action>;
 
-export type ChildrenProps = {
-	children: ReactNode;
-};
-
 export type CustomButtonProps = {
 	text?: string;
 	clickHandler: any;
@@ -76,6 +72,16 @@ export type TaskProp = {
 
 export type Tasks = Task[];
 
+export type TasksProviderProps = {
+	children: ReactNode;
+	trackId: number;
+	topicId: number;
+};
+
+export type TopicsProviderProps = { children: ReactNode; trackId: number };
+
+export type TracksProviderProps = { children: ReactNode };
+
 export type TimerAction = {
 	type: string;
 	payload?: any;
@@ -101,8 +107,8 @@ export type TimerValues = {
 export type Topic = {
 	title: string;
 	id: number;
-	complete: boolean;
-	tasks: [...Tasks];
+	completed?: boolean;
+	tasks?: [...Tasks];
 };
 
 export type Topics = Topic[];
@@ -110,6 +116,6 @@ export type Topics = Topic[];
 export type Track = {
 	title: string;
 	id: number;
-	complete: boolean;
-	topics: [...Topics];
+	completed?: boolean;
+	topics?: [...Topics];
 };
