@@ -55,7 +55,7 @@ return (
 <div><p>{taskDummy.name}</p></div>
 
 			<div className="flex flex-row mt-10 items-end justify-end">
-				<div className="inline-block  hidden relative w-64">
+				<div className="inline-block   relative w-64">
 					<select className=" appearance-none w-full  px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 						<p>tasks</p>
 						<option> 2</option>

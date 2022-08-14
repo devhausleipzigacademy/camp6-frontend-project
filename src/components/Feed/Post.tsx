@@ -1,19 +1,18 @@
 import {useState} from "react";
+import 'animate.css';
+import { fromJSON } from "postcss";
+import { mapRange } from "gsap";
+import { tracksDummies } from "../../database/Dummies";
+import { ConnectionPoolClosedEvent } from "mongodb";
 
 
-
-type BookmarkIconProps = {
-	isSaved: any;
-	setIsSaved: any;
-};
-
-export function BookmarkIcon({isSaved, setIsSaved}: BookmarkIconProps ,{query}:any) {
+export function BookmarkIcon({isSaved,setQuery,query ,setIsSaved}: any){
 	return <></>;
 }
 
-type PostProps = {
-	data: any;
-};
+
+
+
 
 const sav=document.getElementById('sav')
 
@@ -23,8 +22,36 @@ export let resourcesItems:any[]=[{
 }]
 
 
+
+function bookmarks(isSaved: any){
+
+	if(isSaved){
+return<>
+<button type="submit"
+value="text"
+>	<div className={`flex flex-col ${isSaved?"opacity-100":"opacity-0"}  bg-purple-400 absolute -right-28 -top-5  duration-1000 rounded-lg p-2 bg-opacity-20`}>
+{tracksDummies.flatMap((x,idx)=>
+<div className="flex flex-col  rounded-xl p-2 border-b-2 border-white text-white bg-pink-400  bg-opacity-30 h-full">
+<p className="hover:scale-[105%] duration-300 active:text-green-200">{x} </p>
+ </div>
+)}
+
+			</div>
+					</button>
+			</>
+
+	}
+	else {
+		''
+	}
+
+
+}
+
+
+
 let redditUrl = "https://www.reddit.com/";
-export function Post({data}: PostProps) {
+export function Post({data}: any){
 	const [isSaved, setIsSaved] = useState(false);
 
 function addingResources({query}:any){
@@ -33,24 +60,28 @@ if(isSaved){resourcesList.push(query)
 }
 return
 }
-console.log(resourcesList)
+
 
 
 
 	return (
 		<>
 			<>
+
 				<div className="h-full w-fit p-10  flex text-sm  border-2 border-black border-opacity-40 rounded-2xl relative text-black flex-col  bg-white">
-					<BookmarkIcon isSaved={isSaved} setIsSaved={setIsSaved} />
+
+					<BookmarkIcon isSaved={isSaved} setIsSaved={setIsSaved}  />
+					{bookmarks(isSaved)}
 					<button className="border-0"
 
 onClick={addingResources}
 					>
+
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							id="sav"
-							className={`h-10 animate-tada
-  hover:scale-[120%] active:fill-green-500 active:animation- absolute -right-11  top-0  border-white focus:animate-bounce duration-200 w-10 ${isSaved ? "fill-red-600" : "fill-gray-400"} `}
+							className={`h-9 animate-tada
+  hover:scale-[120%] active:fill-green-500 ani active:animation- absolute right-0  -top-10  border-white focus:animate-bounce duration-200 w-10 ${isSaved ? "fill-red-600" : "fill-gray-400"} `}
 							fill="none"
 							viewBox="0 0 24 24"
 							stroke="currentColor"
@@ -74,6 +105,8 @@ onClick={addingResources}
 					</a>
 					<img className="h-[30rem]  self-center    rounded-2xl p-4 " src={data.url_overridden_by_dest} alt="" />
 					<p>{data.selftext}</p>
+
+
 					<a href={redditUrl + data.permalink}>
 						{" "}
 						<p className="text-center hover:scale-[105%] hover:underline mt-2">

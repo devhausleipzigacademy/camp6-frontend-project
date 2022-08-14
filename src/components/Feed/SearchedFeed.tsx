@@ -8,16 +8,16 @@ import { Youtube } from "./Youtube/YoutubeConfig";
 import { moveCursor } from "readline";
 import { taskDummy, tasksDummies } from "../../database/Dummies";
 import { tracksDummies } from "../../database/newDummies";
-
+import {resourcesArr} from "../Resources/ResourcesData"
 import { Console } from "console";
 import { Post } from "./Post";
 
-export default function SearchedFeed({ task }: any) {
+export default function SearchedFeed({ bookmarks }: any) {
 	const [articles, setArticles] = useState([] as Array);
 	const [search, setSearch] = useState("");
- const [query, setQuery] = useState(tracksDummies[0].title);
+ const [query, setQuery] = useState(tracksDummies[1].title);
 	const [limit, setLimit] = useState("100");
-	const [save, setSave] = useState("");
+	const [isSaved, setIsSaved] = useState(false);
 	const [isHidden, setIsHidden] = useState(true);
 	const [opacity, setOpacity] = useState(0.1);
 	function randomize(arr: Array<any>): Array<any> {
@@ -67,11 +67,10 @@ export default function SearchedFeed({ task }: any) {
 		}
 	},[query]);
 
+
 	let color = "";
 	function colorChange() {
 		color = "fill-red-300";
-
-
 	}
 	colorChange();
 	function searchBar(e: any) {
@@ -83,9 +82,12 @@ export default function SearchedFeed({ task }: any) {
 		setQuery(search);
 	}
 
-	function dropDown() {
-		const drop = document.getElementById("dropDown");
-	}
+
+function resourcesArrsFunction(){
+
+
+}
+
 
 	return (
 		<div className=" ">
@@ -135,11 +137,13 @@ export default function SearchedFeed({ task }: any) {
 			</div>
 
 			<div className="flex  relative flex-col  pl-10 h-full w-full mt-20 no-scrollbar items-center justify-evenly  gap-20">
+
+
 				{articles
 					.filter((post: any) =>
 						post.data.post_hint === "image" ? true : false && post.data.domain==="i.imgur.com")
 					.map((post: any) => (
-						<Post data={post.data} />
+						<Post data={post.data} query={query} setQuery={setQuery} />
 					))}
 			</div>
 		</div>
