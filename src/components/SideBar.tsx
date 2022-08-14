@@ -3,12 +3,20 @@ import { FeedSVG } from "../assets/FeedSVG";
 import { HomeSVG } from "../assets/HomeSVG";
 import { ResourcesSVG } from "../assets/ResourcesSVG";
 import { TracksSVG } from "../assets/TracksSVG";
-import { tracksDummies } from "../database/newDummies";
+import { UserData } from "../database/TypesNConsts";
+import { TasksProvider } from "./Contexts/TasksContext";
+import { TopicsProvider } from "./Contexts/TopicsContext";
+import { TracksProvider } from "./Contexts/TracksContext";
+import { useUser } from "./Contexts/UserContext";
 import { Timer } from "./Timer";
 
 export default function SideBar() {
-	const tracksList = tracksDummies.map((track, idx) => (
-		<li key={idx}>{track.title}</li>
+	const user = useUser() as UserData;
+
+	const tracksList = user.tracks.map((track, idx) => (
+		<li key={idx}>
+			<NavLink to={`/tracks/${track.id}`}>{track.title}</NavLink>
+		</li>
 	));
 
 	return (
@@ -47,7 +55,16 @@ export default function SideBar() {
 					</ul>
 				</div>
 				<div className="w-fit h-fit">
-					<Timer />
+					<TracksProvider>
+						<TopicsProvider trackId={user.activeTrackId}>
+							<TasksProvider
+								trackId={user.activeTrackId}
+								topicId={user.activeTopicId}
+							>
+								<Timer />
+							</TasksProvider>
+						</TopicsProvider>
+					</TracksProvider>
 				</div>
 			</div>
 		</>

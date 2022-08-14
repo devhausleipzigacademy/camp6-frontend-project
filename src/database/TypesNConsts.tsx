@@ -1,5 +1,3 @@
-// need to assign and create type for tracks and topics
-
 import { Dispatch, ReactNode } from "react";
 
 // In alphabetical order
@@ -10,10 +8,6 @@ export type Action = {
 };
 
 export type CreateContext = Dispatch<Action>;
-
-export type ChildrenProps = {
-	children: ReactNode;
-};
 
 export type CustomButtonProps = {
 	text?: string;
@@ -42,11 +36,24 @@ export type InitialTask =
 			completed?: boolean;
 	  };
 
-export const initialTask: InitialTask = {
-	name: "Name*",
-	deadline: "dd / mm / yyyy",
-	topic: "default",
-	description: "",
+export type InitialTaskFormInput = {
+	id?: string;
+	name: string;
+	deadline: Date | "dd / mm / yyyy";
+	topicTitle: string;
+	trackTitle: string;
+	topicId: number;
+	trackId: number;
+	description?: string;
+	priority?: boolean;
+	completed?: boolean;
+};
+
+export type RecommendedItemProps = {
+	image: string;
+	link: string;
+	title: string;
+	recommendationCount: number;
 };
 
 export type Resource = {
@@ -76,6 +83,20 @@ export type TaskProp = {
 
 export type Tasks = Task[];
 
+export type TasksProviderProps = {
+	children: ReactNode;
+	trackId: number;
+	topicId: number;
+};
+
+export type TopicsProviderProps = { children: ReactNode; trackId: number };
+
+export type TracksProviderProps = { children: ReactNode };
+
+export type CustomProviderProps = {
+	children: ReactNode;
+};
+
 export type TimerAction = {
 	type: string;
 	payload?: any;
@@ -101,8 +122,8 @@ export type TimerValues = {
 export type Topic = {
 	title: string;
 	id: number;
-	complete: boolean;
-	tasks: [...Tasks];
+	completed?: boolean;
+	tasks?: [...Tasks];
 };
 
 export type Topics = Topic[];
@@ -110,6 +131,17 @@ export type Topics = Topic[];
 export type Track = {
 	title: string;
 	id: number;
-	complete: boolean;
-	topics: [...Topics];
+	completed?: boolean;
+	topics?: [...Topics];
+};
+
+export type Tracks = Track[];
+
+export type UserData = {
+	name: string;
+	imageLink?: string;
+	imagePNG?: string;
+	activeTrackId: number;
+	activeTopicId: number;
+	tracks: [...Tracks];
 };

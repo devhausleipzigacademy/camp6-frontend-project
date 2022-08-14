@@ -1,19 +1,29 @@
 import { createContext, useContext, useReducer } from "react";
-import { tasksDummies } from "../database/Dummies";
 import {
 	Task,
 	Action,
 	Tasks,
-	ChildrenProps,
 	CreateContext,
-} from "../database/TypesNConsts";
+	TasksProviderProps,
+} from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
+import { TopicFinder } from "../../assets/utilities/FinderFunctions";
 
 export const TasksContext = createContext<Tasks | null>(null);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
 
-export function TasksProvider({ children }: ChildrenProps) {
-	const [tasks, dispatch] = useReducer(tasksReducer, tasksDummies);
+export function TasksProvider({
+	children,
+	trackId,
+	topicId,
+}: TasksProviderProps) {
+	const selectedTopic = TopicFinder(trackId, topicId);
+
+	if (selectedTopic.tasks == undefined) {
+		throw Error;
+	}
+
+	const [tasks, dispatch] = useReducer(tasksReducer, selectedTopic.tasks);
 
 	return (
 		<TasksContext.Provider value={tasks}>
@@ -86,7 +96,7 @@ function tasksReducer(tasks: Tasks, action: Action): Tasks {
 
 function newTask(userInput: Task): Task {
 	return {
-		id: uuid(),
+		id: parseInt(uuid()),
 		name: userInput.name,
 		deadline: userInput.deadline,
 		topic: userInput.topic,

@@ -1,6 +1,12 @@
-import { TaskProp, Tasks, CreateContext, Task } from "../database/TypesNConsts";
+import {
+	TaskProp,
+	Tasks,
+	CreateContext,
+	Task,
+	UserData,
+} from "../database/TypesNConsts";
 import { StarButton } from "./buttons/StarButton";
-import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
+import { ACTIONS, useTasks, useTasksDispatch } from "./Contexts/TasksContext";
 
 export function TaskListHome() {
 	const tasks = useTasks() as Tasks;

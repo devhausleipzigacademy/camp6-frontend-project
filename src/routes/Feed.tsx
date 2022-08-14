@@ -1,10 +1,16 @@
-import { CircleSVG } from "../assets/CircleSVG";
-import { StatusHome } from "../components/StatusHome";
+import { useEffect, useState } from "react";
+
+import { data } from "autoprefixer";
+
+import SearchedFeed from "../components/Feed/SearchedFeed";
+import { Youtube } from "../components/Feed/Youtube/YoutubeConfig";
 
 export default function Feed() {
 	return (
-		<div>
-			<span>Feed</span>
-		</div>
+		<>
+			<div className="">
+				<SearchedFeed />
+			</div>
+		</>
 	);
 }

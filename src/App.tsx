@@ -6,6 +6,8 @@ import { useState } from "react";
 import { CrossSVG } from "./assets/CrossSVG";
 import { AddTaskButton } from "./components/buttons/AddTaskButton";
 import { ProfilePicture } from "./components/ProfilePicture";
+import { UserProvider, useUser } from "./components/Contexts/UserContext";
+import { UserData } from "./database/TypesNConsts";
 
 export default function App() {
 	// For the AddTaskButton
@@ -58,21 +60,14 @@ export default function App() {
 				</div>
 			</header>
 
-			<main className="flex  flex-row justify-between w-full h-[calc(100vh-7rem)] gap-6  p-6">
+			<main className="background-gradient-option1 flex flex-row justify-between w-full h-screen gap-6 p-6 pt-24">
 				<div className="flex flex-col justify-between">
 					<SideBar />
 				</div>
-
-				<div className="w-full">
-					{" "}
+				<div className="w-full overflow-y-auto">
 					<Outlet />
 				</div>
 			</main>
-			{/* <img
-				className="p-28  "
-				src="https://images.unsplash.com/photo-1523824921871-d6f1a15151f1"
-				alt=""
-			/> */}
 		</div>
 	);
 }

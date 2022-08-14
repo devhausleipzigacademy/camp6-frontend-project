@@ -1,11 +1,25 @@
-import { tasksDummies, trackDummy } from "../database/Dummies";
+import { TrackFinder } from "../assets/utilities/FinderFunctions";
+import { UserData } from "../database/TypesNConsts";
+import { useUser } from "./Contexts/UserContext";
 
 export function StatusHome() {
-	const allTasks =
-		trackDummy.tasksOpen.length + trackDummy.tasksFinished.length;
+	const user = useUser() as UserData;
+	const selectedTrack = TrackFinder(user.activeTrackId);
 
+	let tasksTotalWithinTrack = 0;
+	let completedTasks = 0;
+
+	selectedTrack.topics.forEach((topic) => {
+		tasksTotalWithinTrack = tasksTotalWithinTrack + topic.tasks?.length;
+
+		topic.tasks.forEach((task) => {
+			if (task.completed == true) completedTasks++;
+		});
+	});
+
+	// Percentage of all tasks within a track
 	const taskCompletionPercentage =
-		(trackDummy.tasksOpen.length / allTasks) * 100;
+		(completedTasks / tasksTotalWithinTrack) * 100;
 
 	let completionMessage;
 
@@ -41,7 +55,7 @@ export function StatusHome() {
 						dominantBaseline="middle"
 						textAnchor="middle"
 					>
-						{taskCompletionPercentage}%
+						{taskCompletionPercentage.toFixed(0)}%
 					</text>
 				</svg>
 				{completionMessage}

@@ -1,29 +1,75 @@
 import { useState } from "react";
-import { topicsDummies } from "../database/Dummies";
+import { TopicFinder, TrackFinder } from "../assets/utilities/FinderFunctions";
 import {
 	CreateContext,
-	InitialTask,
-	initialTask,
+	InitialTaskFormInput,
+	Tasks,
+	Topics,
+	Track,
+	UserData,
 	yesterday,
 } from "../database/TypesNConsts";
 import { ToggleSwitch } from "./buttons/ToggleSwitch";
 
-import { useTasks, useTasksDispatch, ACTIONS } from "./TasksContext";
+import { useTasks, useTasksDispatch, ACTIONS } from "./Contexts/TasksContext";
+import { useTopics } from "./Contexts/TopicsContext";
+import { useTracks } from "./Contexts/TracksContext";
+import { USERACTIONS, useUser, useUserDispatch } from "./Contexts/UserContext";
 
 export function TaskForm() {
+	const user = useUser() as UserData;
+
+	const initialTaskFormInput: InitialTaskFormInput = {
+		name: "Name*",
+		deadline: "dd / mm / yyyy",
+		description: "",
+		topicTitle: "default",
+		trackTitle: "default",
+		trackId: user.activeTrackId,
+		topicId: user.activeTopicId,
+	};
+
 	const [error, SetError] = useState("");
-	const [userInput, SetUserInput] = useState<InitialTask>(initialTask);
-	const tasks = useTasks();
+	const [userInput, SetUserInput] =
+		useState<InitialTaskFormInput>(initialTaskFormInput);
+	const tasks = useTasks() as Tasks;
+	const topics = useTopics() as Topics;
+	const tracks = useTracks() as Track[];
+	const userDispatch = useUserDispatch() as CreateContext;
 	const dispatch = useTasksDispatch() as CreateContext;
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		if (userInput.topic === "default") {
+		if (
+			userInput.topicTitle === "default" ||
+			userInput.trackTitle === "default"
+		) {
 			SetError("Please choose a topic");
 		} else {
+			const activeIds = {
+				trackId: user.activeTrackId,
+				topicId: user.activeTrackId,
+			};
+
+			userDispatch({
+				type: USERACTIONS.SELECT_TOPIC,
+				payload: { topicId: userInput.topicId },
+			});
+			userDispatch({
+				type: USERACTIONS.SELECT_TRACK,
+				payload: { trackId: userInput.trackId },
+			});
 			dispatch({ type: ACTIONS.ADD_TASK, payload: { userInput: userInput } });
+			userDispatch({
+				type: USERACTIONS.SELECT_TOPIC,
+				payload: { topicId: activeIds.topicId },
+			});
+			userDispatch({
+				type: USERACTIONS.SELECT_TRACK,
+				payload: { trackId: activeIds.trackId },
+			});
 			SetError("");
-			SetUserInput(initialTask);
+			SetUserInput(initialTaskFormInput);
 			const calendar = document.getElementById(
 				"deadline-calendar"
 			) as HTMLInputElement;
@@ -33,59 +79,86 @@ export function TaskForm() {
 
 	return (
 		<>
-			<div className="p-2 flex flex-col w-full h-full">
-				<h2 className="self-start">Add Task</h2>
-				<form
-					onSubmit={handleSubmit}
-					className="flex flex-col justify-evenly p-6 gap-6 text-customTextColorLight h-full w-full"
+			<h2 className="self-start ">Add Task</h2>
+			<form onSubmit={handleSubmit} className="flex flex-col p-6 gap-6">
+				<input
+					required
+					type="text"
+					placeholder="Name*"
+					name="name"
+					value={userInput.name}
+					onChange={(event) => {
+						SetUserInput({ ...userInput, name: event.target.value });
+					}}
+				/>
+				<input
+					required
+					name="deadline"
+					value={JSON.stringify(userInput.deadline).slice(1, 11)}
+					onChange={(event) => {
+						SetUserInput({
+							...userInput,
+							deadline: new Date(event.target.value),
+						});
+					}}
+					// a little magic to prevent setting past deadline
+					min={JSON.stringify(yesterday).slice(1, 11)}
+					type="date"
+				/>
+				{error && <p className="error text-red-500   ">{error}</p>}
+				<select
+					name="Track"
+					required
+					id="track"
+					value={userInput.trackTitle}
+					onMouseDown={() => {
+						SetError("");
+					}}
+					onChange={(event) => {
+						const inputId = parseInt(event.target.value);
+						SetUserInput({
+							...userInput,
+							trackId: inputId,
+							trackTitle: TrackFinder(inputId).title,
+						});
+					}}
 				>
-					<input
-						className="rounded-md border pl-4 p-1"
-						required
-						type="text"
-						placeholder="Name*"
-						name="name"
-						value={userInput.name}
-						onChange={(event) => {
-							SetUserInput({ ...userInput, name: event.target.value });
-						}}
-					/>
-					<input
-						required
-						name="deadline"
-						value={JSON.stringify(userInput.deadline).slice(1, 11)}
-						onChange={(event) => {
-							SetUserInput({
-								...userInput,
-								deadline: new Date(event.target.value),
-							});
-						}}
-						// a little magic to prevent setting past deadline
-						min={JSON.stringify(yesterday).slice(1, 11)}
-						type="date"
-					/>
-					{error && <p className="error text-red-500   ">{error}</p>}
-					<select
-						name="Topic"
-						required
-						id="topic"
-						value={userInput.topic}
-						onMouseDown={() => {
-							SetError("");
-						}}
-						onChange={(event) => {
-							SetUserInput({ ...userInput, topic: event.target.value });
-						}}
-					>
-						<option disabled value="default">
-							Select Track
+					<option disabled value="default">
+						(please select)
+					</option>
+					{tracks.map((track, idx) => (
+						<option key={idx} value={track.id}>
+							{track.title}
 						</option>
-						{topicsDummies.map((element, idx) => (
-							<option key={idx} value={element}>
-								{element}
-							</option>
-						))}
-					</select>
+					))}
+				</select>
+
+				<select
+					name="Topic"
+					required
+					id="topic"
+					value={userInput.topicTitle}
+					onMouseDown={() => {
+						SetError("");
+					}}
+					onChange={(event) => {
+						const inputId = parseInt(event.target.value);
+						SetUserInput({
+							...userInput,
+							topicId: inputId,
+							topicTitle: TopicFinder(userInput.trackId, inputId).title,
+						});
+					}}
+				>
+					<option disabled value="default">
+						(please select)
+					</option>
+					{topics.map((topic, idx) => (
+						<option key={idx} value={topic.id}>
+							{topic.title}
+						</option>
+					))}
+				</select>
 
 					<textarea
 						placeholder="Description"

@@ -21,7 +21,7 @@ export const ResourcesDummies: Resources = [ResourceDummy, ResourceDummy];
 
 export const taskDummy: Task = {
 	id: 1,
-	name: "Pooping",
+	name: "SmartyPantsify",
 	deadline: now,
 	topic: "Chores",
 	priority: true,
@@ -235,4 +235,4 @@ export const userDummy = {
 	image: "https://images.unsplash.com/photo-1523824921871-d6f1a15151f1",
 };
 
-export const workLengthDefault: number = 10;
+export const workLengthDefault: number = 25;
