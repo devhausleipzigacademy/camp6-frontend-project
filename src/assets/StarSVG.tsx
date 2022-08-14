@@ -1,7 +1,7 @@
 export function StarSVG() {
   return (
     <svg
-      className="w-full h-full "
+      className="w-full h-full fill-inherit"
       xmlns="http://www.w3.org/2000/svg"
       id="Filled"
       viewBox="0 0 24 24"
