@@ -1,5 +1,5 @@
 import { TaskForm } from "./components/TaskForm";
-import { TasksProvider } from "./components/TasksContext";
+import { TasksProvider } from "./components/Contexts/TasksContext";
 import { Outlet } from "react-router-dom";
 import SideBar from "./components/SideBar";
 import { useState } from "react";
@@ -27,12 +27,10 @@ export default function App() {
 								SetFormVisible(false);
 							}}
 						>
-							{" "}
-							<CrossSVG />{" "}
+							<CrossSVG />
 						</button>
-						<TasksProvider>
-							<TaskForm />
-						</TasksProvider>
+
+						<TaskForm />
 					</div>
 				</div>
 			</>
@@ -41,33 +39,35 @@ export default function App() {
 
 	return (
 		<div className="App">
-			<div
-				id="background"
-				className="background-gradient-option1 fixed -z-10 h-screen w-screen  "
-			></div>
-			{formOverlay}
-			<header className="flex flex-row justify-between shadow-md h-20 top-0 sticky w-screen      items-center gap-4 p-6 bg-whiteTransparent">
-				<h1 className="logo font-bold text-2xl text-customTextColorDark">
-					SmartyPantsify
-				</h1>
-				<div className="flex flex-row gap-8 ">
-					<AddTaskButton
-						clickHandler={() => {
-							SetFormVisible(!formVisible);
-						}}
-					/>
-					<ProfilePicture />
-				</div>
-			</header>
+			<UserProvider>
+				<div
+					id="background"
+					className="background-gradient-option2 fixed -z-10 h-screen w-screen  "
+				></div>
+				{formOverlay}
+				<header className="flex flex-row justify-between shadow-md h-20 top-0 sticky w-screen      items-center gap-4 p-6 bg-whiteTransparent">
+					<h1 className="logo font-bold text-2xl text-customTextColorDark">
+						SmartyPantsify
+					</h1>
+					<div className="flex flex-row gap-8 ">
+						<AddTaskButton
+							clickHandler={() => {
+								SetFormVisible(!formVisible);
+							}}
+						/>
+						<ProfilePicture />
+					</div>
+				</header>
 
-			<main className="background-gradient-option1 flex flex-row justify-between w-full h-screen gap-6 p-6 pt-24">
-				<div className="flex flex-col justify-between">
-					<SideBar />
-				</div>
-				<div className="w-full overflow-y-auto">
-					<Outlet />
-				</div>
-			</main>
+				<main className="flex flex-row justify-between w-full h-screen gap-6 p-6 pt-24">
+					<div className="flex flex-col justify-between">
+						<SideBar />
+					</div>
+					<div className="w-full overflow-y-auto">
+						<Outlet />
+					</div>
+				</main>
+			</UserProvider>
 		</div>
 	);
 }

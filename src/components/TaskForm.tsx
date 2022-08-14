@@ -79,86 +79,90 @@ export function TaskForm() {
 
 	return (
 		<>
-			<h2 className="self-start ">Add Task</h2>
-			<form onSubmit={handleSubmit} className="flex flex-col p-6 gap-6">
-				<input
-					required
-					type="text"
-					placeholder="Name*"
-					name="name"
-					value={userInput.name}
-					onChange={(event) => {
-						SetUserInput({ ...userInput, name: event.target.value });
-					}}
-				/>
-				<input
-					required
-					name="deadline"
-					value={JSON.stringify(userInput.deadline).slice(1, 11)}
-					onChange={(event) => {
-						SetUserInput({
-							...userInput,
-							deadline: new Date(event.target.value),
-						});
-					}}
-					// a little magic to prevent setting past deadline
-					min={JSON.stringify(yesterday).slice(1, 11)}
-					type="date"
-				/>
-				{error && <p className="error text-red-500   ">{error}</p>}
-				<select
-					name="Track"
-					required
-					id="track"
-					value={userInput.trackTitle}
-					onMouseDown={() => {
-						SetError("");
-					}}
-					onChange={(event) => {
-						const inputId = parseInt(event.target.value);
-						SetUserInput({
-							...userInput,
-							trackId: inputId,
-							trackTitle: TrackFinder(inputId).title,
-						});
-					}}
+			<div className="p-2 flex flex-col w-full h-full">
+				<h2 className="self-start ">Add Task</h2>
+				<form
+					onSubmit={handleSubmit}
+					className="flex flex-col justify-evenly p-6 gap-6 text-customTextColorLight h-full w-full"
 				>
-					<option disabled value="default">
-						(please select)
-					</option>
-					{tracks.map((track, idx) => (
-						<option key={idx} value={track.id}>
-							{track.title}
+					<input
+						className="rounded-md border pl-4 p-1"
+						required
+						type="text"
+						placeholder="Name*"
+						name="name"
+						value={userInput.name}
+						onChange={(event) => {
+							SetUserInput({ ...userInput, name: event.target.value });
+						}}
+					/>
+					<input
+						required
+						name="deadline"
+						value={JSON.stringify(userInput.deadline).slice(1, 11)}
+						onChange={(event) => {
+							SetUserInput({
+								...userInput,
+								deadline: new Date(event.target.value),
+							});
+						}}
+						min={JSON.stringify(yesterday).slice(1, 11)}
+						type="date"
+					/>
+					{error && <p className="error text-red-500   ">{error}</p>}
+					<select
+						name="Track"
+						required
+						id="track"
+						value={userInput.trackTitle}
+						onMouseDown={() => {
+							SetError("");
+						}}
+						onChange={(event) => {
+							const inputId = parseInt(event.target.value);
+							SetUserInput({
+								...userInput,
+								trackId: inputId,
+								trackTitle: TrackFinder(inputId).title,
+							});
+						}}
+					>
+						<option disabled value="default">
+							(please select)
 						</option>
-					))}
-				</select>
+						{tracks.map((track, idx) => (
+							<option key={idx} value={track.id}>
+								{track.title}
+							</option>
+						))}
+					</select>
 
-				<select
-					name="Topic"
-					required
-					id="topic"
-					value={userInput.topicTitle}
-					onMouseDown={() => {
-						SetError("");
-					}}
-					onChange={(event) => {
-						const inputId = parseInt(event.target.value);
-						SetUserInput({
-							...userInput,
-							topicId: inputId,
-							topicTitle: TopicFinder(userInput.trackId, inputId).title,
-						});
-					}}
-				>
-					<option disabled value="default">
-						(please select)
-					</option>
-					{topics.map((topic, idx) => (
-						<option key={idx} value={topic.id}>
-							{topic.title}
+					<select
+						name="Topic"
+						required
+						id="topic"
+						value={userInput.topicTitle}
+						onMouseDown={() => {
+							SetError("");
+						}}
+						onChange={(event) => {
+							const inputId = parseInt(event.target.value);
+							SetUserInput({
+								...userInput,
+								topicId: inputId,
+								topicTitle: TopicFinder(userInput.trackId, inputId).title,
+							});
+						}}
+					>
+						<option disabled value="default">
+							(please select)
 						</option>
-					))}
-				</select>
+						{topics.map((topic, idx) => (
+							<option key={idx} value={topic.id}>
+								{topic.title}
+							</option>
+						))}
+					</select>
 
 					<textarea
 						placeholder="Description"

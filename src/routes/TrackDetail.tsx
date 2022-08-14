@@ -2,16 +2,26 @@ import { useParams } from "react-router-dom";
 import { TrackFinder } from "../assets/utilities/FinderFunctions";
 import { TasksProvider } from "../components/Contexts/TasksContext";
 import { TopicsProvider } from "../components/Contexts/TopicsContext";
-import { useUser } from "../components/Contexts/UserContext";
+import {
+	USERACTIONS,
+	useUser,
+	useUserDispatch,
+} from "../components/Contexts/UserContext";
 import { TopicCard } from "../components/TopicCard";
 import { colorsArray } from "../database/newDummies";
-import { UserData } from "../database/TypesNConsts";
+import { CreateContext, UserData } from "../database/TypesNConsts";
 
 export function TrackDetail() {
 	const { trackId } = useParams();
+
 	const user = useUser() as UserData;
+	const userDispatch = useUserDispatch() as CreateContext;
 
 	const trackIdNumb = parseInt(trackId);
+	userDispatch({
+		type: USERACTIONS.SELECT_TRACK,
+		payload: { trackId: trackIdNumb },
+	});
 
 	const selectedTrack = TrackFinder(trackIdNumb);
 

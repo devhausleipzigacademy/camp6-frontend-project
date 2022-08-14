@@ -11,7 +11,7 @@ import { ACTIONS, useTasks, useTasksDispatch } from "./Contexts/TasksContext";
 export function TaskListHome() {
 	const tasks = useTasks() as Tasks;
 
-	if (tasks == undefined || tasks == null) {
+	if (tasks == undefined || tasks == null || tasks.length == 0) {
 		return <p>Oops, looks like you haven't added anything yet</p>;
 	}
 
