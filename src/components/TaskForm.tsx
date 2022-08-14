@@ -1,28 +1,74 @@
 import { useState } from "react";
-import { topicsDummies } from "../database/Dummies";
+import { TopicFinder, TrackFinder } from "../assets/utilities/FinderFunctions";
 import {
 	CreateContext,
-	InitialTask,
-	initialTask,
+	InitialTaskFormInput,
+	Tasks,
+	Topics,
+	Track,
+	UserData,
 	yesterday,
 } from "../database/TypesNConsts";
 
-import { useTasks, useTasksDispatch, ACTIONS } from "./TasksContext";
+import { useTasks, useTasksDispatch, ACTIONS } from "./Contexts/TasksContext";
+import { useTopics } from "./Contexts/TopicsContext";
+import { useTracks } from "./Contexts/TracksContext";
+import { USERACTIONS, useUser, useUserDispatch } from "./Contexts/UserContext";
 
 export function TaskForm() {
+	const user = useUser() as UserData;
+
+	const initialTaskFormInput: InitialTaskFormInput = {
+		name: "Name*",
+		deadline: "dd / mm / yyyy",
+		description: "",
+		topicTitle: "default",
+		trackTitle: "default",
+		trackId: user.activeTrackId,
+		topicId: user.activeTopicId,
+	};
+
 	const [error, SetError] = useState("");
-	const [userInput, SetUserInput] = useState<InitialTask>(initialTask);
-	const tasks = useTasks();
+	const [userInput, SetUserInput] =
+		useState<InitialTaskFormInput>(initialTaskFormInput);
+	const tasks = useTasks() as Tasks;
+	const topics = useTopics() as Topics;
+	const tracks = useTracks() as Track[];
+	const userDispatch = useUserDispatch() as CreateContext;
 	const dispatch = useTasksDispatch() as CreateContext;
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		if (userInput.topic === "default") {
+		if (
+			userInput.topicTitle === "default" ||
+			userInput.trackTitle === "default"
+		) {
 			SetError("Please choose a topic");
 		} else {
+			const activeIds = {
+				trackId: user.activeTrackId,
+				topicId: user.activeTrackId,
+			};
+
+			userDispatch({
+				type: USERACTIONS.SELECT_TOPIC,
+				payload: { topicId: userInput.topicId },
+			});
+			userDispatch({
+				type: USERACTIONS.SELECT_TRACK,
+				payload: { trackId: userInput.trackId },
+			});
 			dispatch({ type: ACTIONS.ADD_TASK, payload: { userInput: userInput } });
+			userDispatch({
+				type: USERACTIONS.SELECT_TOPIC,
+				payload: { topicId: activeIds.topicId },
+			});
+			userDispatch({
+				type: USERACTIONS.SELECT_TRACK,
+				payload: { trackId: activeIds.trackId },
+			});
 			SetError("");
-			SetUserInput(initialTask);
+			SetUserInput(initialTaskFormInput);
 			const calendar = document.getElementById(
 				"deadline-calendar"
 			) as HTMLInputElement;
@@ -60,23 +106,55 @@ export function TaskForm() {
 				/>
 				{error && <p className="error text-red-500   ">{error}</p>}
 				<select
-					name="Topic"
+					name="Track"
 					required
-					id="topic"
-					value={userInput.topic}
+					id="track"
+					value={userInput.trackTitle}
 					onMouseDown={() => {
 						SetError("");
 					}}
 					onChange={(event) => {
-						SetUserInput({ ...userInput, topic: event.target.value });
+						const inputId = parseInt(event.target.value);
+						SetUserInput({
+							...userInput,
+							trackId: inputId,
+							trackTitle: TrackFinder(inputId).title,
+						});
 					}}
 				>
 					<option disabled value="default">
 						(please select)
 					</option>
-					{topicsDummies.map((element, idx) => (
-						<option key={idx} value={element}>
-							{element}
+					{tracks.map((track, idx) => (
+						<option key={idx} value={track.id}>
+							{track.title}
+						</option>
+					))}
+				</select>
+
+				<select
+					name="Topic"
+					required
+					id="topic"
+					value={userInput.topicTitle}
+					onMouseDown={() => {
+						SetError("");
+					}}
+					onChange={(event) => {
+						const inputId = parseInt(event.target.value);
+						SetUserInput({
+							...userInput,
+							topicId: inputId,
+							topicTitle: TopicFinder(userInput.trackId, inputId).title,
+						});
+					}}
+				>
+					<option disabled value="default">
+						(please select)
+					</option>
+					{topics.map((topic, idx) => (
+						<option key={idx} value={topic.id}>
+							{topic.title}
 						</option>
 					))}
 				</select>

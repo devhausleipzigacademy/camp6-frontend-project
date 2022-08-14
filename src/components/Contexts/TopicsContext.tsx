@@ -1,27 +1,26 @@
 import { createContext, useContext, useReducer } from "react";
-import { tracksDummies } from "../database/newDummies";
 import {
 	Action,
 	CreateContext,
 	Topic,
 	Topics,
 	TopicsProviderProps,
-	Track,
-} from "../database/TypesNConsts";
+	UserData,
+} from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
-import { TrackFinder } from "../assets/utilities/FinderFunctions";
+import { TrackFinder } from "../../assets/utilities/FinderFunctions";
+import { useUser } from "./UserContext";
 
-export const TopicsContext = createContext<Track[] | null>(null);
+export const TopicsContext = createContext<Topic[] | null>(null);
 export const TopicsDispatchContext = createContext<CreateContext | null>(null);
 
-export function topicsProvider({ children, trackId }: TopicsProviderProps) {
+export function TopicsProvider({ children, trackId }: TopicsProviderProps) {
 	const selectedTrack = TrackFinder(trackId);
 
 	if (selectedTrack.topics == undefined) {
 		throw Error;
-	} else {
-		const [topics, dispatch] = useReducer(topicsReducer, selectedTrack.topics);
 	}
+	const [topics, dispatch] = useReducer(topicsReducer, selectedTrack.topics);
 
 	return (
 		<TopicsContext.Provider value={topics}>
@@ -57,22 +56,22 @@ function topicsReducer(topics: Topics, action: Action): Topics {
 			return topics.map((topic) => {
 				if (topic.id === action.payload.id) {
 					return { ...topic, title: action.payload.title };
-				} else return topics;
+				} else return topic;
 			});
 		case ACTIONS.ADD_TOPIC:
-			return topics.map((track) => {
-				if (track.id === action.payload.id) {
-					return { ...track, topics: action.payload.topic };
-				} else return track;
+			return topics.map((topic) => {
+				if (topic.id === action.payload.id) {
+					return { ...topic, topics: action.payload.topic };
+				} else return topic;
 			});
 		case ACTIONS.COMPLETED:
-			return topics.map((track) => {
-				if (track.id === action.payload.id) {
-					return { ...track, completed: !track.completed };
-				} else return track;
+			return topics.map((topic) => {
+				if (topic.id === action.payload.id) {
+					return { ...topic, completed: !topic.completed };
+				} else return topic;
 			});
 		case ACTIONS.DELETE:
-			return topics.filter((track) => track.id !== action.payload.id);
+			return topics.filter((topic) => topic.id !== action.payload.id);
 		default:
 			return topics;
 	}

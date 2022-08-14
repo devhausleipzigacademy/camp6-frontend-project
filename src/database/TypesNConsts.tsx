@@ -1,6 +1,8 @@
 // need to assign and create type for tracks and topics
 
 import { Dispatch, ReactNode } from "react";
+import Tracks from "../routes/Tracks";
+import { userData } from "./newDummies";
 
 // In alphabetical order
 
@@ -38,11 +40,24 @@ export type InitialTask =
 			completed?: boolean;
 	  };
 
-export const initialTask: InitialTask = {
-	name: "Name*",
-	deadline: "dd / mm / yyyy",
-	topic: "default",
-	description: "",
+export type InitialTaskFormInput = {
+	id?: string;
+	name: string;
+	deadline: Date | "dd / mm / yyyy";
+	topicTitle: string;
+	trackTitle: string;
+	topicId: number;
+	trackId: number;
+	description?: string;
+	priority?: boolean;
+	completed?: boolean;
+};
+
+export type RecommendedItemProps = {
+	image: string;
+	link: string;
+	title: string;
+	recommendationCount: number;
 };
 
 export type Resource = {
@@ -82,6 +97,10 @@ export type TopicsProviderProps = { children: ReactNode; trackId: number };
 
 export type TracksProviderProps = { children: ReactNode };
 
+export type CustomProviderProps = {
+	children: ReactNode;
+};
+
 export type TimerAction = {
 	type: string;
 	payload?: any;
@@ -118,4 +137,15 @@ export type Track = {
 	id: number;
 	completed?: boolean;
 	topics?: [...Topics];
+};
+
+export type Tracks = Track[];
+
+export type UserData = {
+	name: string;
+	imageLink?: string;
+	imagePNG?: string;
+	activeTrackId: number;
+	activeTopicId: number;
+	tracks: [...Tracks];
 };

@@ -1,18 +1,28 @@
 import { createContext, useContext, useReducer } from "react";
-import { tracksDummies } from "../database/newDummies";
 import {
 	Action,
 	CreateContext,
 	TracksProviderProps,
 	Track,
-} from "../database/TypesNConsts";
+	UserData,
+	Task,
+	InitialTaskFormInput,
+	Tasks,
+} from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
+import { useUser } from "./UserContext";
+import {
+	TopicFinder,
+	TrackFinder,
+} from "../../assets/utilities/FinderFunctions";
 
 export const TracksContext = createContext<Track[] | null>(null);
 export const TracksDispatchContext = createContext<CreateContext | null>(null);
 
-export function tracksProvider({ children }: TracksProviderProps) {
-	const [tracks, dispatch] = useReducer(tracksReducer, tracksDummies);
+export function TracksProvider({ children }: TracksProviderProps) {
+	const user = useUser() as UserData;
+
+	const [tracks, dispatch] = useReducer(tracksReducer, user.tracks);
 
 	return (
 		<TracksContext.Provider value={tracks}>
@@ -32,9 +42,10 @@ export function useTracksDispatch() {
 }
 
 export const ACTIONS = {
+	ADD_TASK: "add-task",
 	ADD_Track: "add-track",
-	COMPLETED: "completed",
 	ADD_TOPIC: "add topic",
+	COMPLETED: "completed",
 	CHANGE_TITLE: "change title",
 	CONFIRM_CHANGE: "confirm change",
 	DELETE: "delete",
@@ -74,6 +85,17 @@ function newTrack(userInput: Track): Track {
 		id: parseInt(uuid()),
 		title: userInput.title,
 		topics: userInput.topics,
+		completed: false,
+	};
+}
+
+function newTask(userInput: InitialTaskFormInput): Task {
+	return {
+		id: parseInt(uuid()),
+		name: userInput.name,
+		deadline: userInput.deadline,
+		description: userInput.description,
+		priority: userInput.priority,
 		completed: false,
 	};
 }

@@ -1,14 +1,16 @@
 import { createContext, useContext, useReducer } from "react";
-import { tracksDummies } from "../database/newDummies";
 import {
 	Task,
 	Action,
 	Tasks,
 	CreateContext,
 	TasksProviderProps,
-} from "../database/TypesNConsts";
+} from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
-import { TopicFinder, TrackFinder } from "../assets/utilities/FinderFunctions";
+import {
+	TopicFinder,
+	TrackFinder,
+} from "../../assets/utilities/FinderFunctions";
 
 export const TasksContext = createContext<Tasks | null>(null);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
@@ -18,8 +20,11 @@ export function TasksProvider({
 	trackId,
 	topicId,
 }: TasksProviderProps) {
-	const selectedTrack = TrackFinder(trackId);
 	const selectedTopic = TopicFinder(trackId, topicId);
+
+	if (selectedTopic.tasks == undefined) {
+		throw Error;
+	}
 
 	const [tasks, dispatch] = useReducer(tasksReducer, selectedTopic.tasks);
 

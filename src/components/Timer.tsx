@@ -1,22 +1,25 @@
 import { useEffect, useReducer } from "react";
+import { breakLengthDefault, workLengthDefault } from "../database/Dummies";
 import {
-	breakLengthDefault,
-	taskDummy,
-	tasksDummies,
-	topicDummy,
-	topicsDummies,
-	trackDummy,
-	tracksDummies,
-	workLengthDefault,
-} from "../database/Dummies";
-import { TimerAction, TimerValues } from "../database/TypesNConsts";
+	Tasks,
+	TimerAction,
+	TimerValues,
+	Topics,
+	Track,
+} from "../database/TypesNConsts";
 
-// The Custom Button is just a placeholder that we can rename and redesign
-import { CustomButton } from "./buttons/custombutton";
 import { PauseButton } from "./buttons/PauseButton";
 import { StopButton } from "./buttons/StopButton";
 import { RestartButton } from "./buttons/RestartButton";
-import { useTasks } from "./TasksContext";
+import { useTasks } from "./Contexts/TasksContext";
+import { useTopics } from "./Contexts/TopicsContext";
+import { useTracks } from "./Contexts/TracksContext";
+import { userData } from "../database/newDummies";
+import {
+	TaskFinder,
+	TopicFinder,
+	TrackFinder,
+} from "../assets/utilities/FinderFunctions";
 
 //
 // Reducer Actions hardcoded
@@ -128,7 +131,19 @@ export function Timer() {
 	//
 	// Bindings
 	//
-	const tasks = useTasks();
+	const tasks = useTasks() as Tasks;
+	const topics = useTopics() as Topics;
+	const tracks = useTracks() as Track[];
+
+	let initialTrack = TrackFinder(userData.activeTrackId).title;
+	let initialTopic = TopicFinder(
+		userData.activeTrackId,
+		userData.activeTopicId
+	).title;
+	let initialTask = TaskFinder(
+		userData.activeTrackId,
+		userData.activeTopicId
+	).name;
 
 	// bindings for timer lengths and switching between work and break time
 	// At some point we can add a function manually set the workLength
@@ -143,9 +158,9 @@ export function Timer() {
 		timeIntervals: [workLength, breakLength],
 		timerDisplay: "Work",
 		timerEnded: false,
-		track: trackDummy.name,
-		topic: topicDummy.name,
-		task: taskDummy.name,
+		track: initialTrack,
+		topic: initialTopic,
+		task: initialTask,
 		selector: allSet,
 		timerState: (
 			<>
@@ -218,9 +233,9 @@ export function Timer() {
 					}}
 				>
 					<option disabled>select track</option>
-					{tracksDummies.map((element, idx) => (
-						<option key={idx} value={element}>
-							{element}
+					{tracks.map((track, idx) => (
+						<option key={idx} value={track.title}>
+							{track.title}
 						</option>
 					))}
 				</select>
@@ -245,9 +260,9 @@ export function Timer() {
 					}}
 				>
 					<option disabled>select topic</option>
-					{topicsDummies.map((element, idx) => (
-						<option key={idx} value={element}>
-							{element}
+					{topics.map((topic, idx) => (
+						<option key={idx} value={topic.title}>
+							{topic.title}
 						</option>
 					))}
 				</select>
@@ -272,10 +287,7 @@ export function Timer() {
 					}}
 				>
 					<option disabled>select task</option>
-					{/* 
-					Note that I am using a different method here because tasksdummies is an array of objects whereas topicsdummies and tracksdummies are arrays of strings. 
-					*/}
-					{tasksDummies.map((task, idx) => (
+					{tasks.map((task, idx) => (
 						<option key={idx} value={task.name}>
 							{task.name}
 						</option>
