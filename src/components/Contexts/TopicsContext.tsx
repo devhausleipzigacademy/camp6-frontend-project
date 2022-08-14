@@ -9,7 +9,6 @@ import {
 } from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
 import { TrackFinder } from "../../assets/utilities/FinderFunctions";
-import { useUser } from "./UserContext";
 
 export const TopicsContext = createContext<Topic[] | null>(null);
 export const TopicsDispatchContext = createContext<CreateContext | null>(null);
@@ -56,12 +55,6 @@ function topicsReducer(topics: Topics, action: Action): Topics {
 			return topics.map((topic) => {
 				if (topic.id === action.payload.id) {
 					return { ...topic, title: action.payload.title };
-				} else return topic;
-			});
-		case ACTIONS.ADD_TOPIC:
-			return topics.map((topic) => {
-				if (topic.id === action.payload.id) {
-					return { ...topic, topics: action.payload.topic };
 				} else return topic;
 			});
 		case ACTIONS.COMPLETED:

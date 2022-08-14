@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { PlusSVG } from "../../assets/PlusSVG";
-import { TaskForm } from "../TaskForm";
-import { TasksProvider } from "../Contexts/TasksContext";
 
 export function AddTaskButton() {
 	const [formVisible, SetFormVisible] = useState(true);

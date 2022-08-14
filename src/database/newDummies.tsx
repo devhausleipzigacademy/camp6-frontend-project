@@ -1,9 +1,10 @@
-import { Track, UserData } from "./TypesNConsts";
+import { UserData } from "./TypesNConsts";
 
 export const userData: UserData = {
 	name: "Fatma",
 	imageLink: "https://images.unsplash.com/photo-1523824921871-d6f1a15151f1",
-	imagePNG: "./src/assets/ProfilePicture.png",
+	imagePNG: "../assets/ProfilePicture.png",
+
 	activeTrackId: 13464575674545,
 	activeTopicId: 1346457567234534,
 	tracks: [
@@ -531,3 +532,11 @@ export const userData: UserData = {
 		},
 	],
 };
+
+export const colorsArray = [
+	"bg-customYellowLight",
+	"bg-customGreenLight",
+	"bg-customPinkLight",
+	"bg-secondaryLight",
+	"bg-customPurpleLight",
+];

@@ -11,10 +11,6 @@ import {
 } from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
 import { useUser } from "./UserContext";
-import {
-	TopicFinder,
-	TrackFinder,
-} from "../../assets/utilities/FinderFunctions";
 
 export const TracksContext = createContext<Track[] | null>(null);
 export const TracksDispatchContext = createContext<CreateContext | null>(null);

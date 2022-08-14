@@ -219,7 +219,7 @@ export function Timer() {
 		<>
 			<div className="flex items-center justify-center">
 				<select
-					className="bg-transparent "
+					className="bg-transparent w-28"
 					required
 					name="track"
 					id="trackselector"
@@ -246,7 +246,7 @@ export function Timer() {
 		<>
 			<div className="flex items-center justify-center">
 				<select
-					className="bg-transparent "
+					className="bg-transparent w-28"
 					required
 					name="topic"
 					id="topicelector"
@@ -273,7 +273,7 @@ export function Timer() {
 		<>
 			<div className="flex items-center justify-center">
 				<select
-					className="bg-transparent "
+					className="bg-transparent w-28"
 					required
 					name="task"
 					id="taskselector"

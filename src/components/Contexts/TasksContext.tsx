@@ -7,10 +7,7 @@ import {
 	TasksProviderProps,
 } from "../../database/TypesNConsts";
 import { v4 as uuid } from "uuid";
-import {
-	TopicFinder,
-	TrackFinder,
-} from "../../assets/utilities/FinderFunctions";
+import { TopicFinder } from "../../assets/utilities/FinderFunctions";
 
 export const TasksContext = createContext<Tasks | null>(null);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
