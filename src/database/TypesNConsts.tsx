@@ -60,7 +60,7 @@ export type Resource = {
 export type Resources = Resource[];
 
 export type Task = {
-  id: number;
+  id: number | string;
   name: string;
   deadline: Date;
   topic: string;
@@ -112,4 +112,15 @@ export type Track = {
   id: number;
   complete: boolean;
   topics: [...Topics];
+};
+
+export type Tracks = Track[];
+
+export type UserData = {
+  name: string;
+  imageLink?: string;
+  imagePNG?: string;
+  activeTrackId: number;
+  activeTopicId: number;
+  tracks: [...Tracks];
 };
