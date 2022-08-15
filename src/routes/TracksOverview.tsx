@@ -1,11 +1,20 @@
-import { TopicCard } from "../components/TopicCard";
-import { TasksProvider } from "../components/TasksContext";
-import { Outlet } from "react-router-dom";
+import { TrackCard } from "../components/TrackCard";
+import { tracksDummies } from "../database/newDummies";
+import { borderColorsArray } from "../database/newDummies";
 
 export default function TracksOverview() {
   return (
-    <div className="pl-10 min-w-min max-w-5xl ">
-      <TasksProvider></TasksProvider>
+    <div className=" pb-7 pl-12 pt-10 ">
+      <ul>
+        {tracksDummies.map((track, index) => (
+          <TrackCard
+            trackId={track.id}
+            colorId={index % borderColorsArray.length}
+            trackName={track.title}
+            topicCount={track.topics.length}
+          />
+        ))}
+      </ul>
     </div>
   );
 }

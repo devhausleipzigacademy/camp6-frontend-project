@@ -26,6 +26,7 @@ module.exports = {
         customTextColorLight: "RGBA(65,65,65,0.35)",
 
         whiteTransparent: "RGBA(255,252,252, 0.8)",
+        greyTransparent: "rgba(215, 215, 215, 0.2)",
       },
       spacing: {
         34: "136px",

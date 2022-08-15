@@ -3,12 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import Home from "./routes/Home";
-import Tracks from "./routes/TracksOverview";
 import Feed from "./routes/Feed";
 import Resources from "./routes/Resources";
 import "./index.css";
-import { TrackDetail } from "./routes/TrackDetail";
 import TracksOverview from "./routes/TracksOverview";
+import { TrackDetail } from "./routes/TrackDetail";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>

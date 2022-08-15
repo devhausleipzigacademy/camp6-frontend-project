@@ -1,14 +1,12 @@
-import { TaskProp, Tasks, CreateContext, now } from "../database/TypesNConsts";
-import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
+import { TaskProp, CreateContext } from "../database/TypesNConsts";
+import { ACTIONS, useTasksDispatch } from "./TasksContext";
 import { v4 as uuid } from "uuid";
-import { useState } from "react";
 import { TrackFinder, TopicFinder } from "../assets/utilities/FinderFunctions";
-import { colorsArray } from "../database/newDummies";
+import { cardColorsArray } from "../database/newDummies";
 
 type TopicListProps = { topicId: number; trackId: number; colorId: number };
 
 export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
-  const selectedTrack = TrackFinder(trackId);
   const selectedTopic = TopicFinder(trackId, topicId);
 
   const tasksFound = selectedTopic.tasks;
@@ -16,9 +14,8 @@ export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
 
   // const tasks = useState(tasksFound) as Tasks;
 
-  const topicCardColor = `${colorsArray[colorId]}`;
+  const topicCardColor = `${cardColorsArray[colorId]}`;
   const classes = `flex items-center w-52 h-8 ${topicCardColor} rounded-t-md`;
-  console.log(classes);
 
   return (
     <div className="pb-7">

@@ -296,7 +296,7 @@ export function Timer() {
             {timerValues.secondsRemaining.toString().padStart(2, "0")} min
           </h3>
         </div>
-        <div className="flex flex-col justify-evenly h-full gap-1   ">
+        <div className="flex flex-col justify-evenly h-full gap-1 py-2  ">
           <PauseButton
             clickHandler={() => {
               dispatch({ type: ACTIONS.TOGGLE_PAUSED });
