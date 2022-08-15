@@ -8,20 +8,22 @@ import Topics from "./routes/Topics";
 import Feed from "./routes/Feed";
 import Resources from "./routes/Resources";
 import "./index.css";
+import { ResourcesFeed } from "./routes/ResourcesFeed";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="/tracks" element={<Tracks />} />
-          <Route path="/topics" element={<Topics />} />
-          <Route path="/feed" element={<Feed />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="*" element={<p>404 - Nothing was found here</p>} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>
+	<React.StrictMode>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<App />}>
+					<Route index element={<Home />} />
+					<Route path="/tracks" element={<Tracks />} />
+					<Route path="/topics" element={<Topics />} />
+					<Route path="/feed" element={<Feed />} />
+					<Route path="/resources" element={<Resources />} />
+					<Route path="/ResourcesFeed" element={<ResourcesFeed />} />
+					<Route path="*" element={<p>404 - Nothing was found here</p>} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	</React.StrictMode>
 );
