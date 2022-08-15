@@ -36,12 +36,13 @@ export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
               <TaskItem task={task} />
             </li>
           ))}
-        <li
+
+        {/* <li
           key={uuid()}
           className="flex p-3 border-r border-b rounded-b-md rounded-t-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl"
         >
-          {/* <AddTaskItem trackId={trackId} topicId={topicId} /> */}
-        </li>
+          <AddTaskItem trackId={trackId} topicId={topicId} />
+        </li> */}
       </ul>
     </div>
   );
