@@ -8,7 +8,7 @@ export function Searchbar({ query, setQuery }: any) {
 
 		function clickHandler(e) {
 			e.preventDefault();
-			console.log(query);
+			// console.log(query);
 			setQuery(search);
 		}
 	}

@@ -515,10 +515,8 @@ export const tracksDummies: Track[] = [
   },
 ];
 
-export const colorsArray = [
-  "bg-customYellowLight",
-  "bg-customGreenLight",
-  "bg-customPinkLight",
-  "bg-secondaryLight",
-  "bg-customPurpleLight",
+	// "Cooking",
+	// "Tap Dance",
+	// "React",
+	// "Japanese",
 ];
