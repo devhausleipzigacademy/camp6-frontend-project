@@ -2,7 +2,7 @@ import { TaskProp, CreateContext } from "../database/TypesNConsts";
 import { ACTIONS, useTasksDispatch } from "./TasksContext";
 import { v4 as uuid } from "uuid";
 import { TrackFinder, TopicFinder } from "../assets/utilities/FinderFunctions";
-import { cardCardColorsArray } from "../database/newDummies";
+import { cardColorsArray } from "../database/newDummies";
 
 type TopicListProps = { topicId: number; trackId: number; colorId: number };
 

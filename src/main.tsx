@@ -8,7 +8,6 @@ import Feed from "./routes/Feed";
 import Resources from "./routes/Resources";
 import "./index.css";
 import { ResourcesFeed } from "./routes/ResourcesFeed";
-import { TrackDetail } from "./routes/TrackDetail";
 import TracksOverview from "./routes/TracksOverview";
 import { TrackDetail } from "./routes/TrackDetail";
 

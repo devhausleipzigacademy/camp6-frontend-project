@@ -1085,7 +1085,7 @@ export const tracksDummies: Track[] = [
   },
 ];
 
-export const cardCardColorsArray = [
+export const cardColorsArray = [
   "bg-customYellowLight",
   "bg-customGreenLight",
   "bg-customPinkLight",
