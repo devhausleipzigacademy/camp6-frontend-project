@@ -3,76 +3,76 @@ import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
 import { v4 as uuid } from "uuid";
 import { useState } from "react";
 import { TrackFinder, TopicFinder } from "../assets/utilities/FinderFunctions";
-import { colorsArray } from "../database/newDummies";
+import { cardColorsArray } from "../database/newDummies";
 
 type TopicListProps = { topicId: number; trackId: number; colorId: number };
 
 export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
-  const selectedTrack = TrackFinder(trackId);
-  const selectedTopic = TopicFinder(trackId, topicId);
+	const selectedTrack = TrackFinder(trackId);
+	const selectedTopic = TopicFinder(trackId, topicId);
 
-  const tasksFound = selectedTopic.tasks;
-  // const filteredTasks = tasks.filter((task) => task.topic === topic);
+	const tasksFound = selectedTopic.tasks;
+	// const filteredTasks = tasks.filter((task) => task.topic === topic);
 
-  // const tasks = useState(tasksFound) as Tasks;
+	// const tasks = useState(tasksFound) as Tasks;
 
-  const topicCardColor = `${colorsArray[colorId]}`;
-  const classes = `flex items-center w-52 h-8 ${topicCardColor} rounded-t-md`;
-  console.log(classes);
+	const topicCardColor = `${cardColorsArray[colorId]}`;
+	const classes = `flex items-center w-52 h-8 ${topicCardColor} rounded-t-md`;
+	console.log(classes);
 
-  return (
-    <div className="pb-7">
-      <div id={topicId} className={classes}>
-        <h2 className="text-customTextColorDark font-subheading text-sm font-medium pl-5 ">
-          {selectedTopic.title}
-        </h2>
-      </div>
+	return (
+		<div className="pb-7">
+			<div id={topicId} className={classes}>
+				<h2 className="text-customTextColorDark font-subheading text-sm font-medium pl-5 ">
+					{selectedTopic.title}
+				</h2>
+			</div>
 
-      <ul>
-        {tasksFound
-          .filter((task) => !task.completed ?? false)
-          .map((task) => (
-            <li
-              key={task.id}
-              className="flex p-3 border-r border-b rounded-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl "
-            >
-              <TaskItem task={task} />
-            </li>
-          ))}
-        <li
-          key={uuid()}
-          className="flex p-3 border-r border-b rounded-b-md rounded-t-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl"
-        >
-          {/* <AddTaskItem trackId={trackId} topicId={topicId} /> */}
-        </li>
-      </ul>
-    </div>
-  );
+			<ul>
+				{tasksFound
+					.filter((task) => !task.completed ?? false)
+					.map((task) => (
+						<li
+							key={task.id}
+							className="flex p-3 border-r border-b rounded-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl "
+						>
+							<TaskItem task={task} />
+						</li>
+					))}
+				<li
+					key={uuid()}
+					className="flex p-3 border-r border-b rounded-b-md rounded-t-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl"
+				>
+					{/* <AddTaskItem trackId={trackId} topicId={topicId} /> */}
+				</li>
+			</ul>
+		</div>
+	);
 }
 
 function TaskItem({ task }: TaskProp) {
-  // I will probably need these here
-  const dispatch = useTasksDispatch() as CreateContext;
+	// I will probably need these here
+	const dispatch = useTasksDispatch() as CreateContext;
 
-  const date = JSON.stringify(task.deadline).slice(1, 11);
+	const date = JSON.stringify(task.deadline).slice(1, 11);
 
-  return (
-    <>
-      <div className="flex flex-row w-full h-full gap-5 items-center">
-        <input
-          type="checkbox"
-          name="completed"
-          onChange={() => {
-            dispatch({ type: ACTIONS.COMPLETED, payload: { id: task.id } });
-          }}
-        />
+	return (
+		<>
+			<div className="flex flex-row w-full h-full gap-5 items-center">
+				<input
+					type="checkbox"
+					name="completed"
+					onChange={() => {
+						dispatch({ type: ACTIONS.COMPLETED, payload: { id: task.id } });
+					}}
+				/>
 
-        <p className="text-xs">{task.name}</p>
+				<p className="text-xs">{task.name}</p>
 
-        <p className="text-xs text-customTextColorLight ">Due: {date}</p>
-      </div>
-    </>
-  );
+				<p className="text-xs text-customTextColorLight ">Due: {date}</p>
+			</div>
+		</>
+	);
 }
 
 // function AddTaskItem({ topicId }: TopicListProps) {

@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
-import Topics from "./routes/Topics";
 
 import Home from "./routes/Home";
 import Tracks from "./routes/TracksOverview";
@@ -23,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 						<Route index element={<TracksOverview />} />
 						<Route path=":trackId" element={<TrackDetail />} />
 					</Route>
-					<Route path="/topics" element={<Topics />} />
+
 					<Route path="/feed" element={<Feed />} />
 					<Route path="/resources" element={<Resources />} />
 					<Route path="/ResourcesFeed" element={<ResourcesFeed />} />
