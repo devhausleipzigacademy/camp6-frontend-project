@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { TrackFinder } from "../assets/utilities/FinderFunctions";
 import { TopicCard } from "../components/TopicCard";
-import { cardColorsArray } from "../database/newDummies";
+import { borderColorsArray } from "../database/newDummies";
 
 export function TrackDetail() {
   const { trackId } = useParams();
@@ -10,7 +10,6 @@ export function TrackDetail() {
   const trackIdNumb = parseInt(trackId);
 
   const selectedTrack = TrackFinder(trackIdNumb);
-  console.log("trackId: " + trackId);
 
   return (
     <div className=" pb-7 pl-12 ">
@@ -23,7 +22,7 @@ export function TrackDetail() {
             <TopicCard
               trackId={trackIdNumb}
               topicId={topic.id}
-              colorId={index % cardColorsArray.length}
+              colorId={index % borderColorsArray.length}
             />
           </li>
         ))}
