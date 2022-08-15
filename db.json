@@ -1,0 +1,28 @@
+{
+  "resources": [
+    {
+      "data": {
+        "url": "/r/ATBGE/comments/vqruu1/alaska_shaped_guitar_with_texas_pick_guard/",
+        "text": "Alaska shaped guitar with Texas pick guard"
+      },
+      "track": "Guitar",
+      "id": 1
+    },
+    {
+      "data": {
+        "url": "/r/guitars/comments/vuexfw/disturbeds_dan_donegans_very_stupid_new_guitar/",
+        "text": "Disturbed's Dan Donegan's very stupid new guitar."
+      },
+      "track": "Guitar",
+      "id": 2
+    },
+    {
+      "data": {
+        "url": "/r/ProgrammerHumor/comments/vtyqf9/pack_it_up_guys_javascript_is_over/",
+        "text": "Pack it up guys, JavaScript is over"
+      },
+      "track": "JavaScript",
+      "id": 3
+    }
+  ]
+}
