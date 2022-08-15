@@ -1,13 +1,11 @@
 import { TaskForm } from "./components/TaskForm";
-import { TasksProvider } from "./components/Contexts/TasksContext";
 import { Outlet } from "react-router-dom";
 import SideBar from "./components/SideBar";
 import { useState } from "react";
 import { CrossSVG } from "./assets/CrossSVG";
 import { AddTaskButton } from "./components/buttons/AddTaskButton";
 import { ProfilePicture } from "./components/ProfilePicture";
-import { UserProvider, useUser } from "./components/Contexts/UserContext";
-import { UserData } from "./database/TypesNConsts";
+import { UserProvider } from "./components/Contexts/UserContext";
 
 export default function App() {
 	// For the AddTaskButton

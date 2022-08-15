@@ -20,7 +20,6 @@ export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
 	const selectedTopic = TopicFinder(trackId, topicId);
 	const TopicIndex = topics.indexOf(selectedTopic);
 
-	console.log(topics[TopicIndex].tasks);
 	const tasksFound = selectedTopic.tasks;
 	const [tasks, SetTasks] = useState(tasksFound);
 	if (tasks === undefined) throw Error;
@@ -61,7 +60,6 @@ export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
 function TaskItem({ task }: TaskProp) {
 	const date = JSON.stringify(task.deadline).slice(1, 11);
 	const [eachTask, SetTask] = useState(task);
-	console.log(eachTask);
 
 	return (
 		<>

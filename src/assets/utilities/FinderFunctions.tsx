@@ -32,8 +32,3 @@ export function TaskFinder(trackId: number, topicId: number): Task {
 
 	return selectedTopic.tasks[0];
 }
-
-export type UnfinishedTasksDetails = {
-	uncompletedTasks: number;
-	tasksTotal: number;
-};

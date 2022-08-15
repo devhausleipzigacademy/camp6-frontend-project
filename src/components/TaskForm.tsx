@@ -14,7 +14,7 @@ import { ToggleSwitch } from "./buttons/ToggleSwitch";
 import { useTasks, useTasksDispatch, ACTIONS } from "./Contexts/TasksContext";
 import { useTopics } from "./Contexts/TopicsContext";
 import { useTracks } from "./Contexts/TracksContext";
-import { USERACTIONS, useUser, useUserDispatch } from "./Contexts/UserContext";
+import { USER_ACTIONS, useUser, useUserDispatch } from "./Contexts/UserContext";
 
 export function TaskForm() {
 	const user = useUser() as UserData;
@@ -52,20 +52,20 @@ export function TaskForm() {
 			};
 
 			userDispatch({
-				type: USERACTIONS.SELECT_TOPIC,
+				type: USER_ACTIONS.SELECT_TOPIC,
 				payload: { topicId: userInput.topicId },
 			});
 			userDispatch({
-				type: USERACTIONS.SELECT_TRACK,
+				type: USER_ACTIONS.SELECT_TRACK,
 				payload: { trackId: userInput.trackId },
 			});
 			dispatch({ type: ACTIONS.ADD_TASK, payload: { userInput: userInput } });
 			userDispatch({
-				type: USERACTIONS.SELECT_TOPIC,
+				type: USER_ACTIONS.SELECT_TOPIC,
 				payload: { topicId: activeIds.topicId },
 			});
 			userDispatch({
-				type: USERACTIONS.SELECT_TRACK,
+				type: USER_ACTIONS.SELECT_TRACK,
 				payload: { trackId: activeIds.trackId },
 			});
 			SetError("");

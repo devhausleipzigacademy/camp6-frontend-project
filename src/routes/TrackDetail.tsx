@@ -3,7 +3,7 @@ import { TrackFinder } from "../assets/utilities/FinderFunctions";
 import { TasksProvider } from "../components/Contexts/TasksContext";
 import { TopicsProvider } from "../components/Contexts/TopicsContext";
 import {
-	USERACTIONS,
+	USER_ACTIONS,
 	useUser,
 	useUserDispatch,
 } from "../components/Contexts/UserContext";
@@ -19,7 +19,7 @@ export function TrackDetail() {
 
 	const trackIdNumb = parseInt(trackId);
 	userDispatch({
-		type: USERACTIONS.SELECT_TRACK,
+		type: USER_ACTIONS.SELECT_TRACK,
 		payload: { trackId: trackIdNumb },
 	});
 
@@ -38,7 +38,7 @@ export function TrackDetail() {
 								trackId={user.activeTrackId}
 								topicId={user.activeTopicId}
 							>
-								<TopicCard
+								<Top1icCard
 									trackId={trackIdNumb}
 									topicId={topic.id}
 									colorId={index % colorsArray.length}

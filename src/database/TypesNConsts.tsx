@@ -81,7 +81,7 @@ export type TaskProp = {
 	task: Task;
 };
 
-export type Tasks = Task[];
+export type Tasks = Map<number, Task>;
 
 export type TasksProviderProps = {
 	children: ReactNode;
@@ -123,25 +123,28 @@ export type Topic = {
 	title: string;
 	id: number;
 	completed?: boolean;
-	tasks?: [...Tasks];
+	tasks?: Tasks;
 };
 
-export type Topics = Topic[];
+export type Topics = Map<number, Topic>;
 
-export type Track = {
-	title: string;
-	id: number;
-	completed?: boolean;
-	topics?: [...Topics];
-};
+export type Track = [
+	id: number,
+	value: {
+		title?: string | undefined;
+		completed?: boolean | undefined;
+		topics?: Topics | undefined;
+	}
+];
 
-export type Tracks = Track[];
+export type Tracks = Map<number, Track>;
 
 export type UserData = {
 	name: string;
 	imageLink?: string;
 	imagePNG?: string;
-	activeTrackId: number;
-	activeTopicId: number;
-	tracks: [...Tracks];
+	activeTrackId?: number;
+	activeTopicId?: number;
+	activeTaskId?: number;
+	tracks: Tracks;
 };
