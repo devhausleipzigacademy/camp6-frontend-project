@@ -1,5 +1,6 @@
 // need to assign and create type for tracks and topics
 
+//TODO: split up types in seperate files
 import { Dispatch, ReactNode } from "react";
 
 // In alphabetical order

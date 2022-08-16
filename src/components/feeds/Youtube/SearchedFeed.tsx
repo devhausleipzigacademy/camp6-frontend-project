@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Task } from "../../../database/TypesNConsts";
+import { Task } from "../../../types/TypesNConsts";
 import { data } from "autoprefixer";
 import { Searchbar } from "../SearchBar";
 import { setInterval } from "timers/promises";

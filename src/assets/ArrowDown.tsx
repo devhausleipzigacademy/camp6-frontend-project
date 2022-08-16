@@ -1,7 +1,9 @@
+import { Icon } from "../components/Icon";
+
 export function ArrowDownSVG() {
   return (
     <svg
-      className="w-full h-full fill-inherit"
+      className="h-full w-full fill-inherit"
       xmlns="http://www.w3.org/2000/svg"
       id="Outline"
       viewBox="0 0 24 24"

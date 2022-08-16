@@ -23,8 +23,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </Route>
 
           <Route path="/feed" element={<Feed />} />
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/ResourcesFeed" element={<ResourcesFeed />} />
+          <Route path="/resources">
+            <Route index element={<Resources />} />
+            <Route path=":track" element={<ResourcesFeed />} />
+          </Route>
+          {/* TODO: add subroute based on tracks e.g. /resources/guitar */}
           <Route path="*" element={<p>404 - Nothing was found here</p>} />
         </Route>
       </Routes>

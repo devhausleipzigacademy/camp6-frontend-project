@@ -9,13 +9,12 @@ import {
   tracksDummies,
   workLengthDefault,
 } from "../database/Dummies";
-import { TimerAction, TimerValues } from "../database/TypesNConsts";
+import { TimerAction, TimerValues } from "../types/TypesNConsts";
 
 // The Custom Button is just a placeholder that we can rename and redesign
-import { CustomButton } from "./buttons/custombutton";
 import { PauseButton } from "./buttons/PauseButton";
-import { StopButton } from "./buttons/StopButton";
 import { RestartButton } from "./buttons/RestartButton";
+import { StopButton } from "./buttons/StopButton";
 
 //
 // Reducer Actions hardcoded
@@ -54,6 +53,7 @@ const allSet = 3;
 // Reducer Function
 //
 
+// TODO: seperate timer and task selection
 function timerReducer(
   timerValues: TimerValues,
   action: TimerAction
@@ -80,8 +80,10 @@ function timerReducer(
       if (timerValues.activeTime === workTime) {
         return { ...timerValues, activeTime: breakTime };
       } else return { ...timerValues, activeTime: workTime };
-    case ACTIONS.TOGGLE_PAUSED:
+    case ACTIONS.TOGGLE_PAUSED: {
+      console.log(timerValues.paused);
       return { ...timerValues, paused: !timerValues.paused };
+    }
     case ACTIONS.TOGGLE_TIMER_ENDED:
       return { ...timerValues, timerEnded: !timerValues.timerEnded };
     case ACTIONS.SET_TIME_INTERVALS:
@@ -98,7 +100,7 @@ function timerReducer(
     case ACTIONS.SET_TOPIC:
       return { ...timerValues, topic: action.payload.topic };
     case ACTIONS.SET_TASK:
-      return { ...timerValues, task: action.payload.task };
+      return { ...timerValues, task: action.payload.task, paused: false };
     case ACTIONS.RESET:
       return {
         ...timerValues,
@@ -136,7 +138,7 @@ export function Timer() {
   const initialtimerValues: TimerValues = {
     activeTime: workTime,
     minutesRemaining: workLength,
-    paused: false,
+    paused: true,
     secondsRemaining: 0,
     timeIntervals: [workLength, breakLength],
     timerDisplay: "Working on",
@@ -165,14 +167,15 @@ export function Timer() {
 
   // Timer that substracts seconds unless paused
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (!timerValues.paused) {
-      const interval = setTimeout(() => {
+      interval = setTimeout(() => {
         dispatch({ type: ACTIONS.RUN_TIMER });
       }, 1000);
-      return () => {
-        clearTimeout(interval);
-      };
     }
+    return () => {
+      clearTimeout(interval);
+    };
   });
 
   // when seconds run out reduce minutes by one and check if timerEnded
@@ -202,7 +205,7 @@ export function Timer() {
     <>
       <div className="flex items-center justify-center">
         <select
-          className="bg-transparent w-28 "
+          className="w-28 bg-transparent "
           required
           name="track"
           id="trackselector"
@@ -229,7 +232,7 @@ export function Timer() {
     <>
       <div className="flex items-center justify-center">
         <select
-          className="bg-transparent w-28"
+          className="w-28 bg-transparent"
           required
           name="topic"
           id="topicelector"
@@ -256,7 +259,7 @@ export function Timer() {
     <>
       <div className="flex items-center justify-center">
         <select
-          className="bg-transparent w-28 "
+          className="w-28 bg-transparent "
           required
           name="task"
           id="taskselector"
@@ -285,19 +288,20 @@ export function Timer() {
 
   const timerFullySet = (
     <>
-      <div className="flex justify-end    w-full  h-full py-2 px-4">
-        <div className="flex flex-col justify-center gap-1 items-end  w-full h-full pr-4">
+      <div className="flex h-full    w-full  justify-end py-2 px-4">
+        <div className="flex h-full w-full flex-col items-end  justify-center gap-1 pr-4">
           <p className="text-xs ">
             {timerValues.timerDisplay}: {timerValues.task}
           </p>
 
-          <h3 className="font-medium  text-subheading text-xl ">
+          <h3 className="text-subheading  text-xl font-medium ">
             {timerValues.minutesRemaining.toString().padStart(2, "0")}:
             {timerValues.secondsRemaining.toString().padStart(2, "0")} min
           </h3>
         </div>
-        <div className="flex flex-col justify-evenly h-full gap-1 py-2  ">
+        <div className="flex h-full flex-col justify-evenly gap-1 py-2  ">
           <PauseButton
+            paused={timerValues.paused}
             clickHandler={() => {
               dispatch({ type: ACTIONS.TOGGLE_PAUSED });
             }}
@@ -355,12 +359,12 @@ export function Timer() {
     timerState = taskSelector;
   } else if (timerValues.selector === allSet) {
     timerState = timerFullySet;
-    if (timerValues.paused) dispatch({ type: ACTIONS.TOGGLE_PAUSED });
+    // if (timerValues.paused) dispatch({ type: ACTIONS.TOGGLE_PAUSED });
   }
 
   return (
     <>
-      <div className=" bg-primary rounded-xl  flex justify-center w-60 shadow-md  h-24  ">
+      <div className=" flex h-24  w-60 justify-center rounded-xl bg-primary  shadow-md  ">
         {timerState}
       </div>
     </>

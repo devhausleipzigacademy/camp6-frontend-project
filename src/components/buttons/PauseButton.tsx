@@ -1,13 +1,19 @@
+import { HomeSVG } from "../../assets/HomeSVG";
 import { PauseSVG } from "../../assets/PauseSVG";
-import { CustomButtonProps } from "../../database/TypesNConsts";
+import { PlaySVG } from "../../assets/PlaySVG";
+import { CustomButtonProps } from "../../types/TypesNConsts";
 
-export function PauseButton({ clickHandler }: CustomButtonProps) {
+interface Props extends CustomButtonProps {
+  paused: boolean;
+}
+
+export function PauseButton({ clickHandler, paused }: Props) {
   return (
     <button
       onClick={clickHandler}
-      className=" bg-whiteTransparent  rounded-full p-1 w-5 h-5 "
+      className=" h-5  w-5 rounded-full bg-whiteTransparent p-1 "
     >
-      <PauseSVG />
+      {!paused ? <PauseSVG /> : <PlaySVG />}
     </button>
   );
 }

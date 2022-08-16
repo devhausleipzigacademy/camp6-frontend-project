@@ -1,5 +1,5 @@
 import { RefreshSVG } from "../../assets/RefreshSVG";
-import { CustomButtonProps } from "../../database/TypesNConsts";
+import { CustomButtonProps } from "../../types/TypesNConsts";
 
 export function RestartButton({ clickHandler }: CustomButtonProps) {
   return (
