@@ -7,8 +7,8 @@ export type Track = {
     id: number;
     complete: boolean;
     topics: [...Topics];
-    tasksOpen: Array<Task>;
-    tasksFinished: Array<Task>;
+    tasksOpen?: Array<Task>;
+    tasksFinished?: Array<Task>;
 };
 
 export type Tracks = Track[];

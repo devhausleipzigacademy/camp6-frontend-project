@@ -24,7 +24,7 @@ export function TrackDetail() {
     } catch(error){
       console.log(error)
     }
-  }, [])
+  }, []);
 
   return (
     <div className=" pb-7 pl-12 ">

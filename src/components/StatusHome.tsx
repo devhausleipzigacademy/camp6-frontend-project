@@ -1,17 +1,27 @@
+import { useEffect } from "react";
 import { Track } from "../types/tracks";
+import { useTracks } from "../utilities/axios";
 
-type StatusHomeProps = {
-  track: Track
-}
+export function StatusHome() {
+  let taskCount = 0;
+  let taskCompletedCount = 0;
 
-export function StatusHome({track}: StatusHomeProps) {
-  const allTasks =
-    track.tasksOpen.length + track.tasksFinished.length;
+  const tracks = useTracks();
 
-  const taskCompletionPercentage =
-    (track.tasksOpen.length / allTasks) * 100;
+  useEffect(() => {
+    tracks.map((track: Track) => {
+      track.topics.map((topic) => {
+        topic.tasks.map((task) => {
+          taskCount++;
+          if (task.completed) taskCompletedCount++;
+        });
+      });
+    });
+  }, [tracks]);
 
-  const completionMessage =
+  let taskCompletionPercentage = (taskCount / taskCompletedCount) * 100;
+  
+  let completionMessage =
     taskCompletionPercentage > 50
       ? "Great work! You’ve completed the majority of your tasks."
       : "You have completed less than half your tasks. Keep it up!";
@@ -19,9 +29,9 @@ export function StatusHome({track}: StatusHomeProps) {
   return (
     <>
       <h3 className="card-heading">Your Progress</h3>
-      <div className="p-4 gap-2 w-full h-5/6 flex flex-col items-center justify-between">
+      <div className="flex h-5/6 w-full flex-col items-center justify-between gap-2 p-4">
         <svg
-          className="fill-primary h-28 flex self-center justify-center "
+          className="flex h-28 justify-center self-center fill-primary "
           viewBox="0 0 120 120"
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +47,7 @@ export function StatusHome({track}: StatusHomeProps) {
             {taskCompletionPercentage}%
           </text>
         </svg>
-        <p className="text-xs w-7/12 text-center">{completionMessage}</p>
+        <p className="w-7/12 text-center text-xs">{completionMessage}</p>
       </div>
     </>
   );

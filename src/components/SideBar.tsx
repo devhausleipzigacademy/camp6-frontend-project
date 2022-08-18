@@ -3,6 +3,7 @@ import { FeedSVG } from "../assets/FeedSVG";
 import { HomeSVG } from "../assets/HomeSVG";
 import { ResourcesSVG } from "../assets/ResourcesSVG";
 import { TracksSVG } from "../assets/TracksSVG";
+import { useTracks } from "../utilities/axios";
 import { Timer } from "./Timer";
 
 interface NavigationItem {
@@ -30,7 +31,9 @@ const navigation: NavigationItem[] = [
 ];
 
 export default function SideBar() {
-  const tracksList = tracksDummies.map((track, idx) => (
+  const tracks = useTracks();
+
+  const tracksList = tracks.map((track, idx) => (
     <li key={idx}>
       <NavLink to={`/tracks/${track.id}`}>{track.title}</NavLink>
     </li>

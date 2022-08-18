@@ -35,9 +35,9 @@ export default function App() {
       <div className="flex h-[calc(100vh-7rem)] w-full justify-between gap-6 p-6">
         <SideBar />
 
-        <main className="flex-1 overflow-auto">
-          <Outlet />
-        </main>
+          <main className="flex-1 overflow-auto">
+            <Outlet />
+          </main>
       </div>
       {/* <img
 				className="p-28  "
