@@ -1,11 +1,15 @@
-import { trackDummy } from "../database/Dummies";
+import { Track } from "../types/tracks";
 
-export function StatusHome() {
+type StatusHomeProps = {
+  track: Track
+}
+
+export function StatusHome({track}: StatusHomeProps) {
   const allTasks =
-    trackDummy.tasksOpen.length + trackDummy.tasksFinished.length;
+    track.tasksOpen.length + track.tasksFinished.length;
 
   const taskCompletionPercentage =
-    (trackDummy.tasksOpen.length / allTasks) * 100;
+    (track.tasksOpen.length / allTasks) * 100;
 
   const completionMessage =
     taskCompletionPercentage > 50

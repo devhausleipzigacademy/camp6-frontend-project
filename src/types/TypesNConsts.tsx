@@ -2,6 +2,7 @@
 
 //TODO: split up types in seperate files
 import { Dispatch, ReactNode } from "react";
+import { Tracks } from "./tracks";
 
 // In alphabetical order
 
@@ -99,23 +100,6 @@ export type TimerValues = {
   timerState: JSX.Element;
 };
 
-export type Topic = {
-  title: string;
-  id: number;
-  complete: boolean;
-  tasks: [...Tasks];
-};
-
-export type Topics = Topic[];
-
-export type Track = {
-  title: string;
-  id: number;
-  complete: boolean;
-  topics: [...Topics];
-};
-
-export type Tracks = Track[];
 
 export type UserData = {
   name: string;

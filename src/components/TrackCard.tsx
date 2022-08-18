@@ -2,8 +2,15 @@ import { ClockSVG } from "../assets/Clock";
 import { ListItemUncheckedSVG } from "../assets/ListItemUnchecked";
 import { StatusSVG } from "../assets/Status";
 import { TopicsSVG } from "../assets/Topics";
-import { borderColorsArray, tracksDummies } from "../database/newDummies";
 import { Track } from "../types/TypesNConsts";
+
+export const borderColorsArray = [
+  "border-b-customYellowLight",
+  "border-b-customGreenLight",
+  "border-b-customPinkLight",
+  "border-b-secondaryLight",
+  "border-b-customPurpleLight",
+];
 
 type TrackListProps = {
   track: Track;

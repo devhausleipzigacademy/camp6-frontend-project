@@ -1,7 +1,14 @@
 import { findTopic } from "../utilities/FinderFunctions";
-import { cardColorsArray } from "../database/newDummies";
 import { CreateContext, TaskProp } from "../types/TypesNConsts";
 import { ACTIONS, useTasksDispatch } from "./TasksContext";
+
+const cardColorsArray = [
+  "bg-customYellowLight",
+  "bg-customGreenLight",
+  "bg-customPinkLight",
+  "bg-secondaryLight",
+  "bg-customPurpleLight",
+];
 
 type TopicListProps = {
   topicId: number;

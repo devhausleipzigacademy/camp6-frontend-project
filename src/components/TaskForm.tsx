@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { topicsDummies } from "../database/Dummies";
 import {
   CreateContext,
   InitialTask,

@@ -1,53 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { tracksDummies } from "../database/newDummies";
 import { Post } from "../components/feeds/Post";
+import { Tracks } from "../types/tracks";
+import { randomize } from "../utilities/randomize";
+import { redditAxios, dbAxios } from "../utilities/axios";
 
 export default function Feed() {
+  const [tracks, setTracks] = useState([] as Tracks)
   const [articles, setArticles] = useState<any[]>([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState(tracksDummies[1].title);
+  const [query, setQuery] = useState("cats");
 
   const limit = "100";
-
-  function randomize(arr: Array<any>): Array<any> {
-    var i, j, tmp;
-    for (i = arr.length - 1; i > 0; i--) {
-      j = Math.floor(Math.random() * (i + 1));
-      tmp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = tmp;
-    }
-    // console.log(arr);
-    return arr;
-  }
-
-  useEffect(() => {
-    if (query === "Random") {
-      Promise.all(
-        tracksDummies.map((item, idx) =>
-          fetch(`https://www.reddit.com/search.json?limit=20&q=${item}&top`)
-        )
-      ).then((listOfResponses) => {
-        Promise.all(
-          listOfResponses.map(async (response) => {
-            return await response.json().then((responseObj) => {
-              return responseObj.data.children;
-            });
-          })
-        ).then((posts) => setArticles(randomize(posts.flat())));
-      });
-    } else {
-      fetch(`https://www.reddit.com/search.json?limit=${limit}&q=${query}&top
-		`)
-        .then((res) => res.json())
-        .then((result) => {
-          if (result != null) {
-            setArticles(result.data.children);
-          }
-        })
-        .catch((err) => console.error(err));
-    }
-  }, [query]);
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
@@ -57,6 +20,36 @@ export default function Feed() {
     event.preventDefault();
     setQuery(search);
   }
+
+  useEffect(() => {
+    try {
+      (async ()=>{
+        if (query === "Random") {
+          const tracks: Tracks = await dbAxios.get('/tracks')
+          
+          const searchResults = await Promise.all(
+            tracks.map(({title}) =>
+              redditAxios.get(`?limit=20&q=${title}&top`)
+            )
+          )
+
+          const posts = searchResults.map((response) => {
+            return response.data.children;
+          });
+
+          setArticles(randomize(posts.flat()));
+        } else {
+
+          const searchResults = await redditAxios.get(`?limit=${limit}&q=${query}&top`)
+          
+          setArticles(searchResults.data.children);
+
+        }
+      })()
+    } catch(error){
+      console.log(error)
+    }
+  }, [query]);
 
   return (
     <div className=" ">
@@ -72,7 +65,7 @@ export default function Feed() {
           >
             <option value="">Select Track</option>
             <option value="Random">Random</option>
-            {tracksDummies.map((track) => (
+            {tracks.map((track) => (
               <option value={track.title}>{track.title}</option>
             ))}
           </select>

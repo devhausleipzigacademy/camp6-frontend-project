@@ -3,7 +3,6 @@ import { FeedSVG } from "../assets/FeedSVG";
 import { HomeSVG } from "../assets/HomeSVG";
 import { ResourcesSVG } from "../assets/ResourcesSVG";
 import { TracksSVG } from "../assets/TracksSVG";
-import { tracksDummies } from "../database/newDummies";
 import { Timer } from "./Timer";
 
 interface NavigationItem {

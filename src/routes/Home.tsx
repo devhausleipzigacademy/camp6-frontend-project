@@ -2,7 +2,6 @@ import { RecommendedHome } from "../components/RecommendedHome";
 import { StatusHome } from ".././components/StatusHome";
 import { TaskListHome } from ".././components/TaskListHome";
 import { TasksProvider } from "../components/TasksContext";
-import { userDummy } from "../database/Dummies";
 
 export default function Home() {
   return (

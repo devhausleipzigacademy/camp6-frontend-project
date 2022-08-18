@@ -1,5 +1,5 @@
-import { tracksDummies } from "../database/newDummies";
-import { Topic, Track } from "../types/TypesNConsts";
+import { Topic } from "../types/topics";
+import { Track } from "../types/tracks";
 
 export function findTrack(trackId: number): Track | undefined {
   return tracksDummies.find((element) => element.id === trackId);

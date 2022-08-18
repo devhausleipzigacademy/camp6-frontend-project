@@ -1,27 +1,41 @@
 import { useParams } from "react-router-dom";
 import { findTrack } from "../utilities/FinderFunctions";
 import { TopicCard } from "../components/TopicCard";
-import { borderColorsArray } from "../database/newDummies";
+import { borderColorsArray } from "../components/TrackCard";
+import { Track } from "../types/tracks";
+import { useEffect, useState } from "react";
+import { dbAxios } from "../utilities/axios";
+
+type TrackParams = {
+  trackId?: string
+}
 
 export function TrackDetail() {
-  const { trackId } = useParams();
+  const { trackId }: Readonly<TrackParams> = useParams();
 
-  const trackIdNumb = parseInt(trackId as string);
+  const [track, setTrack] = useState({} as Track)
 
-  const selectedTrack = findTrack(trackIdNumb);
-
-  if (!selectedTrack) return null;
+  useEffect(() => {
+    try {
+      (async () => {
+        const track = await dbAxios.get(`/track/${trackId}`);
+        setTrack(track.data)
+      })()
+    } catch(error){
+      console.log(error)
+    }
+  }, [])
 
   return (
     <div className=" pb-7 pl-12 ">
       <ul>
         <h2 className=" text-customTextColorDark font-heading font-normal text-2xl pb-4">
-          {selectedTrack.title}
+          {track.title}
         </h2>
-        {selectedTrack.topics.map((topic, index) => (
+        {track.topics.map((topic, index) => (
           <li key={index}>
             <TopicCard
-              trackId={trackIdNumb}
+              trackId={Number(trackId)}
               topicId={topic.id}
               colorId={index % borderColorsArray.length}
             />

@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { titleCase } from "title-case";
+import { dbAxios } from "../utilities/axios";
 
 export function ResourcesFeed() {
   const { track } = useParams();
   const [resources, setResources] = useState<any[]>([]);
 
-  async function getResources() {
-    await fetch(`http://localhost:3000/resources?track=${track!}`)
-      .then((res) => res.json())
-      .then((res) => {
-        setResources(res);
-        return res;
-      });
-  }
-
   useEffect(() => {
-    getResources();
+    try {
+      (async ()=>{
+        const resources = await dbAxios.get(`/resources?track=${track}`)
+        setResources(resources.data);
+      })()
+    } catch (error) {
+      console.log(error)
+    }
   }, []);
 
   return (

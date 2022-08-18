@@ -9,8 +9,4 @@ export type Task = {
   timeSpentInMinutes?: number;
 };
 
-export type TaskProp = {
-  task: Task;
-};
-
 export type Tasks = Task[];

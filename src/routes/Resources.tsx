@@ -1,9 +1,23 @@
 import { groupBy } from "lodash";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { dbAxios } from "../utilities/axios";
 
 export default function Resources() {
-  const groups = useResources();
+  const [groups, setGroups] = useState({});
+
+  useEffect(() => {
+    try {
+      (async ()=>{
+        const resources = await dbAxios.get("/resources")
+        const groups = groupBy(resources.data, "track");
+        setGroups(groups);
+    })()
+    } catch(error){
+      console.log(error)
+    }
+  }, [])
+
   return (
     <div className="  grid grid-flow-col   gap-5  grid-cols-3 grid-rows-2 ">
       {Object.entries<any[]>(groups).map(([track, resourcesArr]) => (
@@ -43,22 +57,4 @@ export default function Resources() {
       ))}
     </div>
   );
-}
-
-function useResources() {
-  const [resources, setResources] = useState([]);
-  const [groups, setGroups] = useState({});
-
-  useEffect(() => {
-    fetch("http://localhost:3000/resources")
-      .then((res) => res.json())
-      .then((res) => setResources(res));
-  }, []);
-
-  useEffect(() => {
-    const groups = groupBy(resources, "track");
-    setGroups(groups);
-  }, [resources]);
-
-  return groups;
 }

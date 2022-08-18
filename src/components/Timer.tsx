@@ -1,14 +1,4 @@
 import { useEffect, useReducer } from "react";
-import {
-  breakLengthDefault,
-  taskDummy,
-  tasksDummies,
-  topicDummy,
-  topicsDummies,
-  trackDummy,
-  tracksDummies,
-  workLengthDefault,
-} from "../database/Dummies";
 import { TimerAction, TimerValues } from "../types/TypesNConsts";
 
 // The Custom Button is just a placeholder that we can rename and redesign
@@ -19,6 +9,9 @@ import { StopButton } from "./buttons/StopButton";
 //
 // Reducer Actions hardcoded
 //
+
+const breakLengthDefault = 0;
+const workLengthDefault = 0;
 
 const ACTIONS = {
   TOGGLE_ACTIVE_TIME: "toggle active time",
