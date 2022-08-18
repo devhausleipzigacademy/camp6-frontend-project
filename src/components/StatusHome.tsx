@@ -1,27 +1,20 @@
-import { tasksDummies, trackDummy } from "../database/Dummies";
+import { Track } from "../types/tracks";
 
-export function StatusHome() {
+type StatusHomeProps = {
+  track: Track
+}
+
+export function StatusHome({track}: StatusHomeProps) {
   const allTasks =
-    trackDummy.tasksOpen.length + trackDummy.tasksFinished.length;
+    track.tasksOpen.length + track.tasksFinished.length;
 
   const taskCompletionPercentage =
-    (trackDummy.tasksOpen.length / allTasks) * 100;
+    (track.tasksOpen.length / allTasks) * 100;
 
-  let completionMessage;
-
-  if (taskCompletionPercentage > 50) {
-    completionMessage = (
-      <p className="text-xs w-1/2">
-        Great work! You’ve completed the majority of your tasks.
-      </p>
-    );
-  } else {
-    completionMessage = (
-      <p className="text-xs w-7/12 text-center  ">
-        You have completed less than half your tasks. Keep it up!
-      </p>
-    );
-  }
+  const completionMessage =
+    taskCompletionPercentage > 50
+      ? "Great work! You’ve completed the majority of your tasks."
+      : "You have completed less than half your tasks. Keep it up!";
 
   return (
     <>
@@ -44,7 +37,7 @@ export function StatusHome() {
             {taskCompletionPercentage}%
           </text>
         </svg>
-        {completionMessage}
+        <p className="text-xs w-7/12 text-center">{completionMessage}</p>
       </div>
     </>
   );

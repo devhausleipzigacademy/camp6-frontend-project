@@ -1,6 +1,8 @@
 // need to assign and create type for tracks and topics
 
+//TODO: split up types in seperate files
 import { Dispatch, ReactNode } from "react";
+import { Tracks } from "./tracks";
 
 // In alphabetical order
 
@@ -43,7 +45,7 @@ export type InitialTask =
     };
 
 export const initialTask: InitialTask = {
-  name: "",
+  name: "Name*",
   deadline: "dd / mm / yyyy",
   topic: "default",
   description: "",
@@ -60,13 +62,14 @@ export type Resource = {
 export type Resources = Resource[];
 
 export type Task = {
-  id: number;
+  id: number | string;
   name: string;
   deadline: Date;
   topic: string;
   description?: string;
   priority?: boolean;
   completed?: boolean;
+  timeSpentInMinutes?: number;
 };
 
 export type TaskProp = {
@@ -95,4 +98,14 @@ export type TimerValues = {
   task: string;
   selector: number;
   timerState: JSX.Element;
+};
+
+
+export type UserData = {
+  name: string;
+  imageLink?: string;
+  imagePNG?: string;
+  activeTrackId: number;
+  activeTopicId: number;
+  tracks: [...Tracks];
 };

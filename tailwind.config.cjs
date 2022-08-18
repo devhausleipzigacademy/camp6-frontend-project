@@ -3,18 +3,33 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontSize: {
+        "2xs": "9px",
+      },
       colors: {
         primary: "#FFC8A6",
-        primarylight: " #FCE4D5",
+        primaryLight: "RGBA(251, 187, 148, 0.75)",
         secondary: "#73C2FB",
-        customPink: "#FFADC5",
-        customGreen: "#A1CB9B",
-        customYellow: "#FCF8C0",
-        customTextColor: "#414141",
+        secondaryLight: "RGBA(127, 185, 197, 0.75);",
+
+        customPinkDark: "#FFADC5",
+        customPinkLight: "RGBA(255, 173, 201, 0.75);",
+
+        customGreenDark: "#A1CB9B",
+        customGreenLight: "RGBA(147, 194, 135, 0.75);",
+
+        customYellowDark: "#FCF8C0",
+        customYellowLight: "RGBA(251, 226, 147, 0.75);",
+
+        customPurpleDark: "#BBB5FF",
+        customPurpleLight: "RGBA(187, 181, 255, 0.75);",
+
         customTextColorDark: "RGBA(65,65,65,1)",
         customTextColorMedium: "RGBA(65,65,65,0.75)",
         customTextColorLight: "RGBA(65,65,65,0.35)",
-        whiteTransparent: "rgba(255,252,252, 0.8)",
+
+        whiteTransparent: "RGBA(255,252,252, 0.8)",
+        greyTransparent: "rgba(215, 215, 215, 0.2)",
       },
       spacing: {
         34: "136px",

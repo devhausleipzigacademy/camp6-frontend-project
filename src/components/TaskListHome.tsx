@@ -1,10 +1,11 @@
-import { TaskProp, Tasks, CreateContext, Task } from "../database/TypesNConsts";
+import { CreateContext, Task, TaskProp } from "../types/TypesNConsts";
+import { StarButton } from "./buttons/StarButton";
 import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
 
 export function TaskListHome() {
-  const tasks = useTasks() as Tasks;
+  const tasks = useTasks();
 
-  if (tasks == undefined || tasks == null) {
+  if (!tasks.length) {
     return <p>Oops, looks like you haven't added anything yet</p>;
   }
 
@@ -52,6 +53,15 @@ function TaskItem({ task }: TaskProp) {
 
         <p className="text-xs text-customTextColorLight ">Due: {date}</p>
       </div>
+      <StarButton
+        value={task.priority}
+        clickHandler={() => {
+          dispatch({
+            type: ACTIONS.PRIORITY,
+            payload: { id: task.id },
+          });
+        }}
+      />
     </>
   );
 }

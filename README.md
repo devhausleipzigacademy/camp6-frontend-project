@@ -2,6 +2,11 @@
 
 # Title tbd
 
+## Todos
+
+- [ ] Use Icon Library e.g. Heroicons (you need to adjust your css to not apply fill colors)
+- [ ] Remove all any types and type properly
+
 ## Mission statement
 
 A one-stop platform for consolidating tasks related to personal mastery of your chosen subjects

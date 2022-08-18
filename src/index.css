@@ -1,121 +1,151 @@
-                    @tailwind base;
-                    @tailwind components;
-                    @tailwind utilities;
-                    @layer utilities {
-                        /* Chrome, Safari and Opera */
-                        .no-scrollbar::-webkit-scrollbar {
-                            display: none;
-                        }
-                        .no-scrollbar {
-                            -ms-overflow-style: none;
-                            /* IE and Edge */
-                            scrollbar-width: none;
-                            /* Firefox */
-                        }
-                    }
-                    /*
-
-                    Hi there!
-                    Please note that som universal styles are applied directly inside the index html body while most styles are applied inside the various tsx files.
-
-                    */
-
-                     @layer base {
-                        p {
-                            @apply font-bodyText text-customTextColor;
-                        }
-                        h1,
-                        h2,
-                        h3,
-                        h4,
-                        h5,
-                        h6 {
-                            @apply font-heading text-customTextColor;
-                        }
-                        svg {
-                            @apply fill-customTextColor;
-                        }
-                    }
-
-                    @layer components {
-                        .background-gradient-option1 {
-                            background: radial-gradient( 49.92% 154.77% at 0% 0%, #73c2fb 12.29%, rgba(115, 194, 251, 0) 100%)
-                            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-                            , radial-gradient( 50.08% 155.28% at 100% 0%, #ffc8a6 0%, rgba(255, 200, 166, 0) 100%)
-                            /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
-                            , linear-gradient(270deg, #ffadc5 1.96%, rgba(255, 173, 197, 0) 71.93%), #fcf8c0;
-                        }
-                        .background-gradient-option2 {
-                            background: rgb(118, 181, 248);
-                            background: linear-gradient( 138deg, rgba(118, 181, 248, 1) 0%, rgba(255, 238, 195, 1) 76%, rgba(255, 194, 179, 1) 100%);
-                        }
-                        .logo {
-                            @apply font-logo font-bold;
-                        }
-                        .heading {
-                            @apply font-heading font-bold;
-                        }
-                        .subheading {
-                            @apply font-subheading font-medium;
-                        }
-                        .tag {
-                            @apply uppercase font-subheading;
-                        }
-                         .card-style {
-    @apply rounded-xl shadow-md bg-whiteTransparent p-4;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-                        .navlink {
-                            @apply font-subheading;
-                        }
-                        /* We can use this selector to target active NavLinks */
-                        a.active {
-                            @apply text-primary fill-primary;
-                        }
-                    }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
 
-                    @layer utilities {
-                        /*
+  .toggle-bg:after {
+    content: "";
+    @apply absolute top-0.5 left-0.5 h-5 w-5 rounded-full border border-gray-300 bg-whiteTransparent shadow-sm transition;
+  }
+  input:checked + .toggle-bg:after {
+    transform: translateX(100%);
+    @apply border-whiteTransparent;
+  }
+  input:checked + .toggle-bg {
+    @apply border-primary bg-primary;
+  }
+}
+/*
 
-                      The following three classes are used for the toggle switch. I thought it easier to read and change if written in here rather than inline.
+Hi there! 
+Please note that som universal styles are applied directly inside the index html body while most styles are applied inside the various tsx files.
 
-                      */
-                        .toggle-bg:after {
-                            content: "";
-                            @apply absolute top-0.5 left-0.5 bg-whiteTransparent border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
-                        }
-                        input:checked+.toggle-bg:after {
-                            transform: translateX(100%);
-                            @apply border-whiteTransparent;
-                        }
-                        input:checked+.toggle-bg {
-                            @apply bg-primary border-primary;
-                        }
-                    }
+*/
 
-                    .navlink {
-                        @apply font-subheading;
-                    }
-                    /* We can use this selector to target active NavLinks */
+@layer base {
+  p {
+    @apply font-bodyText text-customTextColorDark;
+  }
 
-                    a.active {
-                        @apply text-primary fill-primary;
-                    }
-                    /*
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading  text-customTextColorDark;
+  }
+  svg {
+    @apply fill-customTextColorDark;
+  }
+}
 
-                    The following three classes are used for the toggle switch. I thought it easier to read and change if written in here rather than inline.
+@layer components {
+  .icon {
+    @apply h-full w-full;
+  }
+  .background-gradient-option1 {
+    background: radial-gradient(
+          49.92% 154.77% at 0% 0%,
+          #73c2fb 12.29%,
+          rgba(115, 194, 251, 0.5) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+          50.08% 155.28% at 100% 0%,
+          #ffc8a6 0%,
+          rgba(255, 200, 166, 0.5) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      linear-gradient(270deg, #ffadc5 1.96%, rgba(255, 173, 197, 0.5) 71.93%),
+      #fcf8c0;
+  }
 
-                    */
+  .background-gradient-option2 {
+    background: radial-gradient(
+          49.92% 154.77% at 0% 0%,
+          rgba(115, 194, 251, 0.03) 0%,
+          rgba(115, 194, 251, 0.2) 12.29%,
+          rgba(115, 194, 251, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      radial-gradient(
+          50.08% 155.28% at 100% 0%,
+          rgba(255, 200, 166, 0.2) 0%,
+          rgba(255, 200, 166, 0) 100%
+        )
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+      linear-gradient(
+        270deg,
+        rgba(255, 173, 197, 0.2) 1.96%,
+        rgba(255, 173, 197, 0) 71.93%
+      ),
+      rgba(252, 248, 192, 0.2);
+  }
 
-                    .toggle-bg:after {
-                        content: "";
-                        @apply absolute top-0.5 left-0.5 bg-whiteTransparent border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
-                    }
+  .logo {
+    @apply font-logo font-bold;
+  }
 
-                    input:checked+.toggle-bg:after {
-                        transform: translateX(100%);
-                        @apply border-whiteTransparent;
-                    }
+  .card-style {
+    @apply rounded-xl bg-whiteTransparent p-4 shadow-md;
+  }
 
-                    input:checked+.toggle-bg {
-                        @apply bg-primary border-primary;
-                    }
+  .heading {
+    @apply font-heading font-bold;
+  }
+
+  .card-heading {
+    @apply pb-3 font-heading text-xl;
+  }
+
+  .tag {
+    @apply font-subheading uppercase;
+  }
+
+  .navlink {
+    @apply font-subheading;
+  }
+
+  /* We can use this selector to target active NavLinks */
+  a.active {
+    @apply fill-primary text-primary;
+  }
+}
+
+.navlink {
+  @apply font-subheading;
+}
+
+/* We can use this selector to target active NavLinks */
+a.active {
+  @apply fill-primary text-primary;
+}
+
+/*
+
+The following three classes are used for the toggle switch. I thought it easier to read and change if written in here rather than inline.
+
+*/
+
+.toggle-bg:after {
+  content: "";
+  @apply absolute top-0.5 left-0.5 h-5 w-5 rounded-full border border-gray-300 bg-whiteTransparent shadow-sm transition;
+}
+input:checked + .toggle-bg:after {
+  transform: translateX(100%);
+  @apply border-whiteTransparent;
+}
+input:checked + .toggle-bg {
+  @apply border-primary bg-primary;
+}
