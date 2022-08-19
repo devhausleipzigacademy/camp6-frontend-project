@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Track } from "../types/tracks";
 import { useTracks } from "../utilities/axios";
 
@@ -8,19 +7,18 @@ export function StatusHome() {
 
   const tracks = useTracks();
 
-  useEffect(() => {
-    tracks.map((track: Track) => {
-      track.topics.map((topic) => {
-        topic.tasks.map((task) => {
-          taskCount++;
-          if (task.completed) taskCompletedCount++;
-        });
+  tracks.map((track: Track) => {
+    track.topics.map((topic) => {
+      topic.tasks.map((task) => {
+        taskCount = taskCount + 1;
+        if (task.completed) taskCompletedCount = taskCompletedCount + 1;
+        return taskCount;
       });
     });
-  }, [tracks]);
+  });
 
-  let taskCompletionPercentage = (taskCount / taskCompletedCount) * 100;
-  
+  let taskCompletionPercentage = (taskCompletedCount / taskCount) * 100;
+
   let completionMessage =
     taskCompletionPercentage > 50
       ? "Great work! You’ve completed the majority of your tasks."

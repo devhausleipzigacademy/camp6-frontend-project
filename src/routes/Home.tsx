@@ -1,33 +1,29 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { StatusHome } from ".././components/StatusHome";
-import { TaskListHome } from ".././components/TaskListHome";
 import { RecommendedHome } from "../components/RecommendedHome";
-import { TasksProvider } from "../components/TasksContext";
-import { User } from "../types/user";
-import { dbAxios, useUser } from "../utilities/axios";
+import { useUser } from "../utilities/axios";
 
 export default function Home() {
   //TODO: Create auth so that we don't have to hard code here
   const userId = 1234;
 
   const user = useUser(userId);
-  
+
   return (
-    <div className="flex flex-col gap-4 h-full w-full">
+    <div className="flex h-full w-full flex-col gap-4">
       <h2 className=" text-2xl font-light ">Welcome back, {user.name}!</h2>
 
-      <div id="upperElements" className="w-full h-80 flex flex-row gap-4 ">
-        <div id="upcomingTasks" className=" w-2/3 h-full card-style">
-          <TasksProvider>
-            <TaskListHome />
-          </TasksProvider>
+      <div id="upperElements" className="flex h-80 w-full flex-row gap-4 ">
+        <div id="upcomingTasks" className=" card-style h-full w-2/3">
+          {/* <TasksProvider> */}
+          {/* TODO: Fix TaskListHome component */}
+          {/* <TaskListHome /> */}
+          {/* </TasksProvider> */}
         </div>
-        <div id="statusBoard" className="w-1/3 h-full  card-style">
+        <div id="statusBoard" className="card-style h-full  w-1/3">
           <StatusHome />
         </div>
       </div>
-      <div id="recommendedBlogposts" className="w-full h-96 card-style">
+      <div id="recommendedBlogposts" className="card-style h-96 w-full">
         <RecommendedHome />
       </div>
     </div>
