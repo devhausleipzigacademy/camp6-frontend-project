@@ -30,13 +30,13 @@ export function useTracks() {
 	return tracks;
 }
 
-export function useUser(userId: number) {
+export function useUser(userId: number, userObject?: User) {
 	const [user, setUser] = useState({} as User);
 
 	useEffect(() => {
 		try {
 			(async () => {
-				const userResponse = await dbAxios.get(`/users/${userId}`);
+				const userResponse = await dbAxios.post(`/users/${userId}`, userObject);
 				setUser(userResponse.data);
 			})();
 		} catch (error) {

@@ -14,7 +14,8 @@ export const TasksContext = createContext<Tasks>([]);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
 
 export function TasksProvider({ children }: ChildrenProps) {
-	const [tasks, dispatch] = useReducer(tasksReducer, useTasks());
+	const taskstemp = useTasks();
+	const [tasks, dispatch] = useReducer(tasksReducer, taskstemp);
 
 	return (
 		<TasksContext.Provider value={tasks}>
@@ -25,6 +26,7 @@ export function TasksProvider({ children }: ChildrenProps) {
 	);
 }
 
+// TODO Tasksprovider not working, fix infinite rerendering bug, check insertion of ususer in usereducer
 export function useTasksDispatch() {
 	return useContext(TasksDispatchContext);
 }
