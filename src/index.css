@@ -24,6 +24,7 @@
   input:checked + .toggle-bg {
     @apply border-primary bg-primary;
   }
+
 }
 /*
 

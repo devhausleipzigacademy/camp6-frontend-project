@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { StatusHome } from ".././components/StatusHome";
 import { TaskListHome } from ".././components/TaskListHome";
-import { IsButtonShownContext } from "../App";
 import { RecommendedHome } from "../components/RecommendedHome";
 import { TasksProvider } from "../components/TasksContext";
 import { User } from "../types/user";
@@ -11,8 +10,6 @@ import { dbAxios, useUser } from "../utilities/axios";
 export default function Home() {
   //TODO: Create auth so that we don't have to hard code here
   const userId = 1234;
-
-  const isButtonShown = useContext(IsButtonShownContext);
 
   const user = useUser(userId);
   

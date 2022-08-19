@@ -1,9 +1,15 @@
-export function ProfilePicture() {
+
+type ProfilePictureParams = {
+  src: string;
+  classes: string;
+}
+
+export function ProfilePicture({src, classes}: ProfilePictureParams ) {
   return (
     <div>
       <img
-        className="cover rounded-full h-12 w-12 "
-        src=".././src/assets/ProfilePicture.png"
+        className={`cover rounded-full ${classes}`}
+        src={src}
       />
     </div>
   );
