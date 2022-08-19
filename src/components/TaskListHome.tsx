@@ -1,10 +1,10 @@
 import { CreateContext, Task, TaskProp } from "../types/TypesNConsts";
 import { useTasks } from "../utilities/axios";
 import { StarButton } from "./buttons/StarButton";
-import { ACTIONS, useTasksDispatch } from "./TasksContext";
+import { ACTIONS, useTasksDispatch, useTasksReducer } from "./TasksContext";
 
 export function TaskListHome() {
-	const tasks = useTasks();
+	const tasks = useTasksReducer();
 
 	if (!tasks.length) {
 		return <p>Oops, looks like you haven't added anything yet</p>;

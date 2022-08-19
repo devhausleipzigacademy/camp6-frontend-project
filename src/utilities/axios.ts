@@ -4,6 +4,7 @@ import { Tasks } from "../types/tasks";
 import { Tracks } from "../types/tracks";
 import { Task } from "../types/TypesNConsts";
 import { User } from "../types/user";
+import { v4 as uuid } from "uuid";
 
 export const dbAxios = axios.create({
 	baseURL: "http://localhost:3000",
@@ -48,16 +49,15 @@ export function useUser(userId: number, userObject?: User) {
 }
 
 export function useTasks() {
-	const [tasks, setTasks] = useState([] as Tasks);
-	let taksTempArr: Array<Task> = [];
+	let tasksTempArr: Array<Task> = [];
 	const tracks = useTracks();
 	tracks.map((track) =>
 		track.topics.map((topic) =>
-			topic.tasks.map((task) => taksTempArr.push(task))
+			topic.tasks.map((task) => tasksTempArr.push(task))
 		)
 	);
-	setTasks(taksTempArr);
-	return tasks;
+
+	return tasksTempArr;
 }
 
 // export const useTasks = axios.create({

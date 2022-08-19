@@ -26,6 +26,10 @@ export function TasksProvider({ children }: ChildrenProps) {
 	);
 }
 
+export function useTasksReducer() {
+	return useContext(TasksContext);
+}
+
 // TODO Tasksprovider not working, fix infinite rerendering bug, check insertion of ususer in usereducer
 export function useTasksDispatch() {
 	return useContext(TasksDispatchContext);
