@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Tracks } from "../types/tracks";
+import { User } from "../types/user";
 
 export const dbAxios = axios.create({
     baseURL: 'http://localhost:3000',
@@ -28,7 +29,7 @@ export function useTracks() {
 }
 
 export function useUser(userId: number) {
-  const [user, setUser] = useState(userId);
+  const [user, setUser] = useState({} as User);
 
   useEffect(() => {
     try {
