@@ -10,6 +10,7 @@ export function ProfilePicture({src, classes}: ProfilePictureParams ) {
       <img
         className={`cover rounded-full ${classes}`}
         src={src}
+        alt="profile-picture"
       />
     </div>
   );

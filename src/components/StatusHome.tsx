@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { Track } from "../types/tracks";
 import { useTracks } from "../utilities/axios";
 
-export function StatusHome() {
+type StatusHomeParams = {
+  arteficialPercentageComplete: number;
+}
+
+export function StatusHome({arteficialPercentageComplete} : StatusHomeParams) {
   let taskCount = 0;
   let taskCompletedCount = 0;
 
@@ -19,7 +23,7 @@ export function StatusHome() {
     });
   }, [tracks]);
 
-  let taskCompletionPercentage = (taskCount / taskCompletedCount) * 100;
+  let taskCompletionPercentage = ((taskCount / (taskCompletedCount === 0 ? 1 : taskCompletedCount)) * 100);
   
   let completionMessage =
     taskCompletionPercentage > 50
@@ -28,7 +32,7 @@ export function StatusHome() {
 
   return (
     <>
-      <h3 className="card-heading">Your Progress</h3>
+      <h3 className="font-logo card-heading">Your Progress</h3>
       <div className="flex h-5/6 w-full flex-col items-center justify-between gap-2 p-4">
         <svg
           className="flex h-28 justify-center self-center fill-primary "
@@ -44,7 +48,10 @@ export function StatusHome() {
             dominantBaseline="middle"
             textAnchor="middle"
           >
-            {taskCompletionPercentage}%
+            <>
+            {console.log(arteficialPercentageComplete)}
+            {arteficialPercentageComplete ?? taskCompletionPercentage}%
+            </>
           </text>
         </svg>
         <p className="w-7/12 text-center text-xs">{completionMessage}</p>
