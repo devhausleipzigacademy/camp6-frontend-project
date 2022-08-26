@@ -1,6 +1,8 @@
 import { findTopic } from "../utilities/FinderFunctions";
 import { CreateContext, TaskProp } from "../types/TypesNConsts";
 import { ACTIONS, useTasksDispatch } from "./TasksContext";
+import { Topic } from "../types/topics";
+import { useTasks } from "../hooks/useTasks";
 
 const cardColorsArray = [
   "bg-customYellowLight",
@@ -11,36 +13,32 @@ const cardColorsArray = [
 ];
 
 type TopicListProps = {
-  topicId: number;
-  trackId: number;
+  topic: Topic;
   colorId: number;
 };
 
-export function TopicCard({ topicId, trackId, colorId }: TopicListProps) {
-  const selectedTopic = findTopic(trackId, topicId);
-
-  if (!selectedTopic) return null;
-
-  const tasksFound = selectedTopic.tasks;
-
+export function TopicCard({ topic, colorId }: TopicListProps) {
+  // const tasksFound = selectedTopic.tasks;
   const topicCardColor = `${cardColorsArray[colorId]}`;
   const classes = `flex items-center w-52 h-8 ${topicCardColor} rounded-t-md`;
 
+  const tasks = useTasks().filter((task) => task.topicId === topic.id);
+
   return (
     <div className="pb-7">
-      <div id={topicId.toString()} className={classes}>
-        <h2 className="text-customTextColorDark font-subheading text-sm font-medium pl-5 ">
-          {selectedTopic.title}
+      <div id={topic.id.toString()} className={classes}>
+        <h2 className="pl-5 font-subheading text-sm font-medium text-customTextColorDark ">
+          {topic.title}
         </h2>
       </div>
 
       <ul>
-        {tasksFound
+        {tasks
           .filter((task) => !task.completed)
           .map((task) => (
             <li
               key={task.id}
-              className="flex p-3 border-r border-b rounded-sm  justify-between items-center gap-2 h-9 bg-white max-w-5xl "
+              className="flex h-9 max-w-5xl items-center justify-between  gap-2 rounded-sm border-r border-b bg-white p-3 "
             >
               <TaskItem task={task} />
             </li>
@@ -64,7 +62,7 @@ function TaskItem({ task }: TaskProp) {
   const date = JSON.stringify(task.deadline).slice(1, 11);
 
   return (
-    <div className="flex flex-row w-full h-full gap-5 items-center">
+    <div className="flex h-full w-full flex-row items-center gap-5">
       <input
         type="checkbox"
         name="completed"

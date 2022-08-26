@@ -1,17 +1,13 @@
 import { StatusSVG } from "../assets/Status";
 import { useTasks } from "../hooks/useTasks";
-import { Track } from "../types/tracks";
-import { useTracks } from "../utilities/axios";
 
 export function StatusHome() {
   const tasks = useTasks();
   let taskCount = tasks.length;
   let taskCompletedCount = tasks.filter((task) => task.completed).length;
 
-  let taskCompletionPercentage;
-  taskCount == 0
-    ? (taskCompletionPercentage = 0)
-    : (taskCompletionPercentage = (taskCompletedCount / taskCount) * 100);
+  let taskCompletionPercentage =
+    taskCount == 0 ? 0 : (taskCompletedCount / taskCount) * 100;
 
   let completionMessage =
     taskCompletionPercentage > 50

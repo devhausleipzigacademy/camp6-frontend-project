@@ -8,6 +8,7 @@ const taskDummies = [
     completed: true,
     timeSpentInMinutes: 25,
     trackId: 1,
+    topicId: 1346457567234534,
   },
   {
     id: 4,
@@ -18,6 +19,7 @@ const taskDummies = [
     completed: false,
     timeSpentInMinutes: 0,
     trackId: 1,
+    topicId: 1346457567234534,
   },
   {
     id: 5,
@@ -28,6 +30,7 @@ const taskDummies = [
     completed: false,
     timeSpentInMinutes: 0,
     trackId: 1,
+    topicId: 1346457567234534,
   },
   {
     id: 6,
@@ -38,6 +41,7 @@ const taskDummies = [
     completed: true,
     timeSpentInMinutes: 25,
     trackId: 1,
+    topicId: 1346457567234534,
   },
   {
     id: 7,
@@ -48,6 +52,7 @@ const taskDummies = [
     completed: false,
     timeSpentInMinutes: 0,
     trackId: 1,
+    topicId: 1346457567234534,
   },
 ];
 

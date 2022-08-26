@@ -9,7 +9,11 @@ export default function TracksOverview() {
     <div className=" pb-7 pl-12 pt-10 ">
       <ul>
         {tracks.map((track, index) => (
-          <TrackCard track={track} colorId={index % borderColorsArray.length} />
+          <TrackCard
+            key={track.id}
+            track={track}
+            colorId={index % borderColorsArray.length}
+          />
         ))}
       </ul>
     </div>
