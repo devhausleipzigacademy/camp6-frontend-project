@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Post } from "../components/feeds/Post";
 import { Tracks } from "../types/tracks";
 import { randomize } from "../utilities/randomize";
-import { redditAxios, dbAxios } from "../utilities/axios";
+import { redditAxios, dbAxios, useTracks } from "../utilities/axios";
 import { redditUrl } from "../utilities/api";
 
 export default function Feed() {
-  const [tracks, setTracks] = useState([] as Tracks);
   const [articles, setArticles] = useState<any[]>([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("cats");
+  const [query, setQuery] = useState("All");
+  const tracks = useTracks();
 
   const limit = "100";
 
@@ -22,12 +22,11 @@ export default function Feed() {
     setQuery(search);
   }
 
-  async function getTracks() {
-    if (query === "Random") {
+  async function getFeed() {
+    if (query === "All") {
       const tracks: Tracks = await fetch("http://localhost:3000/tracks").then(
         (res) => res.json()
       );
-      console.log(tracks);
 
       const searchResults = await Promise.all(
         tracks.map(({ title }) =>
@@ -36,7 +35,6 @@ export default function Feed() {
           )
         )
       );
-      console.log(searchResults);
 
       const posts = searchResults.map((response) => {
         return response.data.children;
@@ -47,17 +45,13 @@ export default function Feed() {
       const searchResults = await fetch(
         `${redditUrl}?limit=${limit}&q=${query}&top`
       ).then((res) => res.json());
-      // const searchResults = await redditAxios.get(
-      //   `?limit=${limit}&q=${query}&top`
-      // );
-
       setArticles(searchResults.data.children);
     }
   }
 
   useEffect(() => {
     try {
-      getTracks();
+      getFeed();
     } catch (error) {
       console.log(error);
     }
@@ -75,8 +69,10 @@ export default function Feed() {
             }}
             className=" focus:shadow-outline w-full    appearance-none rounded px-4 py-2 pr-8 leading-tight shadow focus:outline-none"
           >
-            <option value="">Select Track</option>
-            <option value="Random">Random</option>
+            <option disabled value="">
+              Select Track
+            </option>
+            <option value="All">All</option>
             {tracks.map((track) => (
               <option key={track.id} value={track.title}>
                 {track.title}

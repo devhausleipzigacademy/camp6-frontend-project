@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Tasks } from "../types/tasks";
+import { Topic } from "../types/topics";
 import { Tracks } from "../types/tracks";
 import { Task } from "../types/TypesNConsts";
 import { User } from "../types/user";
@@ -32,6 +33,31 @@ export function useTracks() {
   }, []);
 
   return tracks;
+}
+
+export function useTopics() {
+  const [topics, setTopics] = useState<Topic[]>([]);
+
+  async function getTopics() {
+    const tracks: Tracks = await fetch("http://localhost:3000/tracks").then(
+      (res) => res.json()
+    );
+    const combinedTopics = tracks.reduce<Topic[]>(
+      (acc, track) => [...acc, ...track.topics],
+      []
+    );
+    setTopics(combinedTopics);
+  }
+
+  useEffect(() => {
+    try {
+      getTopics();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  return topics;
 }
 
 export function useUser(userId: number) {
