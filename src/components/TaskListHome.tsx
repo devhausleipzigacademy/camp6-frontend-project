@@ -1,9 +1,24 @@
-import { CreateContext, Task, TaskProp } from "../types/TypesNConsts";
-import { StarButton } from "./buttons/StarButton";
-import { ACTIONS, useTasks, useTasksDispatch } from "./TasksContext";
+import { useState } from "react";
+import { Tasks } from "../types/tasks";
+import { Track } from "../types/tracks";
+import { TaskProp } from "../types/TypesNConsts";
+import { useTracks } from "../utilities/axios";
 
 export function TaskListHome() {
-  const tasks = useTasks();
+  const tracks = useTracks();
+  console.log(tracks);
+  const [tasks, setTasks] = useState([] as Tasks);
+
+  tracks.map((track: Track) => {
+    track.topics.map((topic) => {
+      topic.tasks.map((task) => {
+        setTasks(tasks.concat(task));
+        // taskCount = taskCount + 1;
+        // if (task.completed) taskCompletedCount = taskCompletedCount + 1;
+        // return taskCount;
+      });
+    });
+  });
 
   if (!tasks.length) {
     return <p>Oops, looks like you haven't added anything yet</p>;
@@ -14,15 +29,15 @@ export function TaskListHome() {
       <h3 className="card-heading">Upcoming Tasks</h3>
       <ul className="px-4 py-2">
         {tasks
-          .sort(
-            (a: Task, b: Task) => a.deadline.getTime() - b.deadline.getTime()
-          )
+          //   .sort(
+          //     (a: Task, b: Task) => a.deadline.getTime() - b.deadline.getTime()
+          //   )
           .filter((task) => !task.completed ?? false)
           .splice(0, 5)
           .map((task) => (
             <li
               key={task.id}
-              className="flex p-3 border-r border-b rounded-md  justify-between items-center gap-2 h-9 bg-white"
+              className="flex h-9 items-center justify-between gap-2  rounded-md border-r border-b bg-white p-3"
             >
               <TaskItem task={task} />
             </li>
@@ -34,34 +49,34 @@ export function TaskListHome() {
 
 function TaskItem({ task }: TaskProp) {
   // I will probably need these here
-  const dispatch = useTasksDispatch() as CreateContext;
+  //   const dispatch = useTasksDispatch() as CreateContext;
 
   const date = JSON.stringify(task.deadline).slice(1, 11);
 
   return (
     <>
-      <div className="flex flex-row w-full h-full gap-5 items-center">
+      <div className="flex h-full w-full flex-row items-center gap-5">
         <input
           type="checkbox"
           name="completed"
-          onChange={() => {
-            dispatch({ type: ACTIONS.COMPLETED, payload: { id: task.id } });
-          }}
+          //   onChange={() => {
+          //     dispatch({ type: ACTIONS.COMPLETED, payload: { id: task.id } });
+          //   }}
         />
 
         <p className="text-xs">{task.name}</p>
 
         <p className="text-xs text-customTextColorLight ">Due: {date}</p>
       </div>
-      <StarButton
+      {/* <StarButton
         value={task.priority}
         clickHandler={() => {
-          dispatch({
-            type: ACTIONS.PRIORITY,
-            payload: { id: task.id },
-          });
+          //   dispatch({
+          //     type: ACTIONS.PRIORITY,
+          //     payload: { id: task.id },
+          //   });
         }}
-      />
+      /> */}
     </>
   );
 }

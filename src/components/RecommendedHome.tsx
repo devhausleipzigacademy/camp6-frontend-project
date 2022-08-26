@@ -1,6 +1,7 @@
 import { ResourcesSVG } from "../assets/ResourcesSVG";
 
 interface RecommendedItem {
+  key: number;
   link: string;
   image: string;
   title: string;
@@ -9,20 +10,23 @@ interface RecommendedItem {
 
 const items: RecommendedItem[] = [
   {
-    link: "#",
+    key: 1,
+    link: "#1",
     image: "./src/assets/RecommendedOne.jpeg",
     title:
       "The 2 best gadgets for drawing a curly line (spoiler: it will cost you a fortune)",
     recommendationCount: "3001",
   },
   {
-    link: "#",
+    key: 2,
+    link: "#2",
     image: "./src/assets/RecommendedTwo.jpeg",
     title: "Pinching an image has never been easier with this simple trick",
     recommendationCount: "2581",
   },
   {
-    link: "#",
+    key: 3,
+    link: "#3",
     image: "./src/assets/RecommendedThree.jpeg",
     title: "“Look, I can draw shapes”, is what this person wants to tell us",
     recommendationCount: "2338",
@@ -52,23 +56,23 @@ function RecommendedItem({
 }: ItemProps) {
   return (
     <>
-      <div className="flex flex-col w-full h-full gap-y-3 px-1 items-center ">
+      <div className="flex h-full w-full flex-col items-center gap-y-3 px-1">
         <div>
           <a href={link}>
             <img className="cover rounded" src={image} />
           </a>
         </div>
         <div className="flex flex-row justify-between">
-          <div className="w-4/5 flex ">
-            <h3 className="text-xs text-customTextColorMedium font-medium font-bodyText ">
+          <div className="flex w-4/5 ">
+            <h3 className="font-bodyText text-xs font-medium text-customTextColorMedium ">
               <a href={link}>{title}</a>
             </h3>
           </div>
-          <div className="flex flex-row w-1/5 items-baseline gap-1 justify-end">
-            <div className="h-3 fill-customTextColorLight flex self-baseline">
+          <div className="flex w-1/5 flex-row items-baseline justify-end gap-1">
+            <div className="flex h-3 self-baseline fill-customTextColorLight">
               <ResourcesSVG />
             </div>
-            <p className="text-xs text-customTextColorLight font-bodyText">
+            <p className="font-bodyText text-xs text-customTextColorLight">
               {recommendationCount}
             </p>
           </div>

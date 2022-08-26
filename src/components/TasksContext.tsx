@@ -1,19 +1,22 @@
 import { createContext, useContext, useReducer } from "react";
 
+import { v4 as uuid } from "uuid";
 import {
-  Task,
   Action,
-  Tasks,
   ChildrenProps,
   CreateContext,
+  Task,
+  Tasks,
 } from "../types/TypesNConsts";
-import { v4 as uuid } from "uuid";
+import { useTasks } from "../utilities/axios";
 
 export const TasksContext = createContext<Tasks>([]);
 export const TasksDispatchContext = createContext<CreateContext | null>(null);
 
 export function TasksProvider({ children }: ChildrenProps) {
-  const [tasks, dispatch] = useReducer(tasksReducer, tasksDummies);
+  const taskstemp = useTasks();
+  const [tasks, dispatch] = useReducer(tasksReducer, taskstemp);
+  console.log("tasks: " + tasks);
 
   return (
     <TasksContext.Provider value={tasks}>
@@ -24,10 +27,11 @@ export function TasksProvider({ children }: ChildrenProps) {
   );
 }
 
-export function useTasks() {
+export function useTasksReducer() {
   return useContext(TasksContext);
 }
 
+// TODO Tasksprovider not working, fix infinite rerendering bug, check insertion of ususer in usereducer
 export function useTasksDispatch() {
   return useContext(TasksDispatchContext);
 }
