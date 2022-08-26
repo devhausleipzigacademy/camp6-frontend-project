@@ -114,11 +114,11 @@ function BookmarkButton({ data, query }: BookmarkButtonProps) {
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
-        stroke-width=".5"
+        strokeWidth=".5"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
         />
       </svg>
@@ -134,11 +134,11 @@ function UpvoteIcon() {
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      stroke-width="2"
+      strokeWidth="2"
     >
       <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         d="M7 11l5-5m0 0l5 5m-5-5v12"
       />
     </svg>
@@ -154,9 +154,9 @@ function CommentIcon() {
       fill="currentColor"
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z"
-        clip-rule="evenodd"
+        clipRule="evenodd"
       />
     </svg>
   );

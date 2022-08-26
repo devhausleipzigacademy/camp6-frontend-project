@@ -10,18 +10,22 @@ export const dbAxios = axios.create({
 });
 
 export const redditAxios = axios.create({
-  baseURL: "https://www.reddit.com/search.json",
+  baseURL: "https://api.reddit.com/search.json",
 });
 
 export function useTracks() {
-  const [tracks, setTracks] = useState([] as Tracks);
+  const [tracks, setTracks] = useState<Tracks>([]);
+
+  async function getTracks() {
+    const tracks = await fetch("http://localhost:3000/tracks").then((res) =>
+      res.json()
+    );
+    setTracks(tracks);
+  }
 
   useEffect(() => {
     try {
-      (async () => {
-        const tracks = await dbAxios.get("/tracks");
-        setTracks(tracks.data);
-      })();
+      getTracks();
     } catch (error) {
       console.log(error);
     }

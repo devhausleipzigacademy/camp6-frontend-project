@@ -1,5 +1,6 @@
 import { StatusHome } from ".././components/StatusHome";
 import { RecommendedHome } from "../components/RecommendedHome";
+import { TaskListHome } from "../components/TaskListHome";
 import { useUser } from "../utilities/axios";
 
 export default function Home() {
@@ -14,10 +15,7 @@ export default function Home() {
 
       <div id="upperElements" className="flex h-80 w-full flex-row gap-4 ">
         <div id="upcomingTasks" className=" card-style h-full w-2/3">
-          {/* <TasksProvider> */}
-          {/* TODO: Fix TaskListHome component */}
-          {/* <TaskListHome /> */}
-          {/* </TasksProvider> */}
+          <TaskListHome />
         </div>
         <div id="statusBoard" className="card-style h-full  w-1/3">
           <StatusHome />
