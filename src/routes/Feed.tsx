@@ -4,9 +4,9 @@ import { Tracks } from "../types/tracks";
 import { randomize } from "../utilities/randomize";
 import { redditAxios, dbAxios, useTracks } from "../utilities/axios";
 import { redditUrl } from "../utilities/api";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Feed() {
-  const [articles, setArticles] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("All");
   const tracks = useTracks();
@@ -40,14 +40,16 @@ export default function Feed() {
         return response.data.children;
       });
 
-      setArticles(randomize(posts.flat()));
+      return randomize(posts.flat());
     } else {
       const searchResults = await fetch(
         `${redditUrl}?limit=${limit}&q=${query}&top`
       ).then((res) => res.json());
-      setArticles(searchResults.data.children);
+      return searchResults.data.children;
     }
   }
+
+  const { data: feed, isLoading } = useQuery<any[]>(["feed"], getFeed);
 
   useEffect(() => {
     try {
@@ -111,13 +113,14 @@ export default function Feed() {
       <div className="no-scrollbar  relative mt-20  flex h-full w-full flex-col items-center justify-evenly gap-20  pl-10">
         {/* TODO:Add Loading State */}
         {/* TODO:Nothing found state */}
-        {articles
-          // TODO: Type your shit
-          .filter((post: any) => post.data.post_hint === "image")
-          .filter((post) => post.data.domain !== "i.imgur.com")
-          .map((post: any) => (
-            <Post key={post.data.id} data={post.data} query={query} />
-          ))}
+        {feed &&
+          feed
+            // TODO: Type your shit
+            .filter((post: any) => post.data.post_hint === "image")
+            .filter((post) => post.data.domain !== "i.imgur.com")
+            .map((post: any) => (
+              <Post key={post.data.id} data={post.data} query={query} />
+            ))}
       </div>
     </div>
   );
